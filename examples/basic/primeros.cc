@@ -12,5 +12,5 @@ using Mat = DenseMatrix<Number>;
 
 int main(){
     hdnum::Vector<float> x(10);
-    std::cout<< x ;
+    std::cout<< x << std::endl;
 }
