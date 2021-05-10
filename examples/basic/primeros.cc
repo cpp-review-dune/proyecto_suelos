@@ -57,8 +57,37 @@ int main(){
     std::cout<<"El vector resta es r1 es "<<r1<<std::endl;
     r1 /= 1.23;
     std::cout<<"El nuevo r1 vector dividido en 1.23 es "<<r1<<std::endl;
-
-
-
-
+    r1 *=2;
+    std::cout<<"El vector r1 multiplicado por 2"<<r1<<std::endl;
+    r1.update(2,z1);
+    std::cout<<"r1.update(1.23,z1) r1=r1+a*z1"<<r1<<std::endl;
+    std::cout<<"Producto escalar"<<std::endl;
+    float s;
+    s = z1*r1;
+    std::cout<<"El producto punto z1*r1 es"<<s<<std::endl;
+    std::cout<<"El vector w es"<<w<<std::endl;
+    w.iwidth(2);
+    w.iwidth(10);
+    w.precision(16);
+    std::cout<<"El nuevo vector w es "<<w<<std::endl;
+    std::cout<<"El vector cx es"<<cx<<std::endl;
+    float d = norm(w);
+    float e = w.two_norm_2();
+    std::cout<<"Calculo de la norma "<<d<<"two_norm = "<<e<<std::endl;
+    zero(w);
+    std::cout<<"El valor de w despues del comando zero(w) es"<<w<<std::endl;
+    fill (w ,( float )1.0);
+    std::cout<<"El valor de w despues del comando fill(w,(float)1.0)"<<w<<std::endl;
+    zero(w);
+    fill (w ,( float )1.0 ,( float )0.1);
+    std::cout<<"El valor de w despues del comando fill(w,(float)1.0,(float)0.1)"<<w<<std::endl;
+    hdnum::Vector<int> v{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    std::cout<<"El vector v es"<<v<<std::endl;
+    std::fill(v.begin(), v.end(), -1);
+    std::cout<<"El vector v es"<<v<<std::endl;
+    for (auto elem : v) {
+        std::cout << elem << " ";
+    }
+    std::cout << "\n";
+    return 0;
 }
