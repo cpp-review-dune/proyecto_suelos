@@ -1,6 +1,7 @@
 // vektoren.cc
 #include <iostream>    // notwendig zur Ausgabe
 #include "hdnum.hh"    // hdnum header
+#include "src/ode.hh"
 #include <gmp.h>       // gmp header
 #include <gmpxx.h>     // gmp header
 using namespace std;
@@ -89,5 +90,17 @@ int main(){
         std::cout << elem << " ";
     }
     std::cout << "\n";
+    hdnum::Vector<float> w1(5);
+    fill (w1 ,( float )1.0 ,( float )0.1);
+    std::cout<<"Rellena el vector iniciando en valor inicial y aumentando de a 01 fill (w1 ,( float )1.0 ,( float )0.1)"<<w1<<std::endl;
+    std::cout<<"El vector w es "<<w<<std::endl;
+    //zero(w);
+    //unitvector(w,3);
+    r1.width();
+    r1.iwidth();
+    std::cout<<"El vector w despues de unitvector(w,2) es "<<r1<<std::endl;
+    std::cout<<"Imprimir datos en un archivo .dat gnuplot(test.dat,w)"<<std::endl;
+    gnuplot("test.dat",r1);
+    std::cout<<"Se imprimen los siguientes datos"<<r1<<std::endl;
     return 0;
 }
