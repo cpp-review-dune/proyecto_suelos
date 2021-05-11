@@ -102,5 +102,8 @@ int main(){
     std::cout<<"Imprimir datos en un archivo .dat gnuplot(test.dat,w)"<<std::endl;
     gnuplot("test.dat",r1);
     std::cout<<"Se imprimen los siguientes datos"<<r1<<std::endl;
+    std::cout<<"Imprimir dos vectores gnuplot(test2,w,z)"<<std::endl;
+    gnuplot("test1.dat",w,z);
+    //std::endl;
     return 0;
 }
