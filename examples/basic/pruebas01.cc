@@ -2,7 +2,8 @@
 #include <math.h>
 
 int main(){
-    /**
+///Probando la documentación
+/**
 * Texto anterior a la lista
 * - item lista 1
 * - sub item 1
