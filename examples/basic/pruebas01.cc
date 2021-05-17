@@ -38,6 +38,6 @@ int main(){
     double pi=3.14159;
     int x = int (pi);
     std::cout<< "El valor redondeado de pi es "<< x<<std::endl;
-
+    std::cout<< "Incluir una función\n";
     return 0;
 }

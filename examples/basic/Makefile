@@ -13,7 +13,10 @@ HDNUMPATH  = ../..
 # Programs reqiring no GMP support
 #
 
-primeros: primeros.cc
+#primeros: primeros.cc
+#	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
+
+prueba01: pruebas01.cc
 	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
 
 #lr_opcount: lr_opcount.cc
