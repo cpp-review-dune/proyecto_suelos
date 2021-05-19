@@ -1,6 +1,9 @@
 include ../../make.def
 HDNUMPATH  = ../..
 
+primero: holamundo.cc
+	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
+
 # rule to build all programs without GMP support. That is the default
 #nogmp: corona lr_opcount matrizen vektoren precision
 
@@ -16,8 +19,8 @@ HDNUMPATH  = ../..
 #primeros: primeros.cc
 #	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
 
-prueba01: pruebas01.cc
-	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
+#prueba01: pruebas01.cc
+#	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
 
 #lr_opcount: lr_opcount.cc
 #	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
