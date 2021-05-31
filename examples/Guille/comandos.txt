@@ -1,0 +1,53 @@
+    1  ls
+    2  cd examples/
+    3  ls
+    4  cd Guille/
+    5  ls
+    6  rm 'este ese l metodo euler'
+    7  rm 'este ese el metodo euler'
+    8  rm 'este es el metodo de euler' 
+    9  cd ..
+   10  git status
+   11  git add Guille/Makefile 
+   12  git commit -m "este es un archivo Makefile"
+   13  git push
+   14  git pull
+   15  git status
+   16  git add Guille/euler 
+   17  git commit -m "Este es el ejecutable de el metodo euler"
+   18  git push
+   19  clear
+   20  ls
+   21  cd Guille/
+   22  ls
+   23  make
+   24  ls
+   25  ./prueba
+   26  ./prueba1
+   27  ./prueba2
+   28  clear
+   29  cp /workspace/proyecto_suelos/examples/dairo/ejecucio2.sh /workspace/proyecto_suelos/examples/Guille
+   30  touch ejecucion3.sh
+   31  ls -l
+   32  chmod +x ejecucion3.sh
+   33  ls
+   34  rm a.out prueba*
+   35  ls
+   36  ./ejecucion3.sh
+   37  ls
+   38  cd textos/
+   39  ls
+   40  touch ejecutable4.sh
+   41  pwd
+   42  cd ..
+   43  ls
+   44  touch ejecutable4.sh
+   45  history
+   46  history > comandos.txt 
+   47  ls -l
+   48  chmod +x ejecutable4.sh 
+   49  ls
+   50  ./ejecutable4.sh 
+   51  ls
+   52  history
+   53  history > comandos.txt 
