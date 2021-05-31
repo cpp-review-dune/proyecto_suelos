@@ -8,9 +8,11 @@ HDNUMPATH  = ../..
 #gmp: wurzel wurzelbanach lr integralgleichung
 
 #all: nogmp gmp
+all: prueba1 prueba3 
 
 prueba1: Hola.cc
 	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
 
-prueba2: ensayo.cc
+prueba3: euler.cc
 	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
+
