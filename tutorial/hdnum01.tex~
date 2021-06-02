@@ -57,20 +57,18 @@
 
 \begin{abstract}
 Este manual de Hdnum, está basado en la propuesta presentada por la universidad de 
-Heidelberg Alemania en el curso en Perú en 2020, para introducirse en el manejo de las soluciones de ecuaciones
-diferenciales ordinarias.
+Heidelberg Alemania en el curso de Lima, Perú en 2020, para introducirse en el manejo de las soluciones de ecuaciones
+diferenciales ordinarias y parciales.
 \end{abstract}
 
 \tableofcontents{tocdepth}{5}
 
 \section{Introducción}
-
-\subsection{Que es HDNUM}
-
-Die Heidelberger Numerikbibliothek (HDNUM) ist eine C++-basierte Bibliothek
-zur Durchführung der praktischen Übungen zu den Vorlesungen \textit{Einführung in die
-Numerik} und \textit{Numerik (gewöhnlicher Differentialgleichungen)}. Die aktuelle Version ist
-unter
+Ésta es una prueba
+\subsection{Que es HDNUM?}
+La biblioteca numérica de Heildeberg HDNUM, es una biblioteca basada en C++ para realizar ejercicios prácticos en clases
+magistrales, que incluye métodos numéricos para resolver ecuaciones diferenciales ordinarias, la actual versión está 
+disponible en :
 \begin{center}
 \url{https://parcomp-git.iwr.uni-heidelberg.de/Teaching/hdnum}
 \end{center}
