@@ -64,7 +64,7 @@ diferenciales ordinarias y parciales.
 \tableofcontents{tocdepth}{5}
 
 \section{Introducción}
-Ésta es una prueba
+Haremos un breve resumen de HDNUM
 \subsection{Que es HDNUM?}
 La biblioteca numérica de Heildeberg HDNUM, es una biblioteca basada en C++ para realizar ejercicios prácticos en clases
 magistrales, que incluye métodos numéricos para resolver ecuaciones diferenciales ordinarias, la actual versión está 
@@ -76,70 +76,53 @@ disponible en :
 Que tiene un control de vesiones administrada por \lstinline{git} .
 Spezifische Versionen können auf der jeweiligen Vorlesungswebseite veröffentlicht werden.
 
-Ziele bei der Entwicklung von HDNUM waren i) die einfache Benutzbarkeit (inklusive einfacher
-Installation),
-ii) die Demonstration objektorientierter Programmierung in der Numerik sowie die
-Möglichkeit zur Durchführung von Berechnungen mit beliebiger Genauigkeit auf Basis
-der Gnu Multiple Precision\footnote{\url{https://gmplib.org}} Bibliothek.
-Derzeit bietet HDNUM die folgende Funktionalität:
+Los objetivos en el desarrollo de HDNUM fueron i) la facilidad de uso (incluida la instalación simple), ii) la demostración de la programación orientada a objetos en la solución de métodos numéricos, así como la posibilidad de realizar cálculos con cualquier grado de precisión sobre la base de Gnu Multiple Precision Biblioteca. HDNUM ofrece actualmente las siguientes funciones:
 \begin{enumerate}[1)]
-\item Klassen für Matrizen und Vektoren
-\item Lösung linearer Gleichungssystem
-\item Lösung nichtlinearer Gleichungssysteme
-\item Lösung von Systemen gewöhnlicher Differentialgleichungen
-\item Lösung der Poissongleichung mit Finiten Differenzen
+\item Clases para vectores y matrices
+\item Solución de sistemas de ecuaciones lineales
+\item Solución de sistemas de ecuaciones no lineales
+\item Solución de la ecuación de Poisson utilizando diferencias finitas
 \end{enumerate}
 
 \subsection{Instalación}
 
-HDNUM ist eine \glqq{}header only\grqq{} Bibliothek und erfordert keine Installation
-ausser dem Herunterladen der Dateien. Die aktuelle Version kann man mittels
+HDNUM es una biblioteca de ''solo encabezado'' y no requiere ninguna instalación más que descargar los archivos. La versión actual se puede encontrar usando el siguiente comando para descargarla:
+
 \begin{lstlisting}[basicstyle=\ttfamily\footnotesize,language=bash,frame=single]
 $ git clone https://parcomp-git.iwr.uni-heidelberg.de/Teaching/hdnum.git
 \end{lstlisting}
-herunterladen. Hierzu ist das Programm \lstinline{git} erforderlich, welches für alle
-Betriebssysteme frei erhältlich ist. Alternativ wird üblicherweise auch ein
-komprimiertes \lstinline{tar}-archive auf der Homepage der jeweiligen Vorlesung angeboten.
-Dies entpackt man mittels
+
+Para realizar esto se requiere el programa \lstinline{git}, el cual está disponible gratuitamente para todos los sistemas operativos. Alternativamente también hay un archivo comprimido que se puede descargar \lstinline{tar} en la página del evento.
 \begin{lstlisting}[basicstyle=\ttfamily\small,frame=single]
 $ tar zxvf hdnum-XX.tgz
 \end{lstlisting}
-In dem entpackten bzw. installiertem Verzeichnis findet man die folgenden Dateien und
-Unterverzeichnisse:
+Los siguientes archivos y subdirectorios se pueden encontrar en el directorio instalado o descomprimido:
 \begin{itemize}
-\item \lstinline{hdnum.hh}: Diese Header-Datei ist in ein C++-Programm einzubinden um HDNUM
-nutzen zu können.
-\item Das Verzeichnis \lstinline{mystuff} ist für ihre Programme vorgesehen aber Sie können
-natürlich jedes andere Verzeichnis nutzen. Wichtig ist nur, dass der Compiler die Datei
-\lstinline{hdnum.hh} findet. Im Verzeichnis \lstinline{mystuff} ist schon ein Beispielprogramm
-um gleich loslegen zu können. Dieses Programm übersetzt man mit:
+\item \lstinline{hdnum.hh}: Este archivo encabezado debe estar integrado en los programa \lstinline{C++} para poder utilizar HDNUM.
+\item 
+El directorio \lstinline{mystuff} está destinado a sus programas, pero, por supuesto, puede utilizar cualquier otro directorio. Lo único importante es que el compilador tenga el archivo \lstinline{hdnum.hh} que encontró. En el registro mystuff ya es un programa de muestra para comenzar de inmediato. Este programa se puede compilar de la siguiente forma:
+
 \begin{lstlisting}[basicstyle=\ttfamily\small,frame=single]
 $ cd mystuff
 $ g++ -I.. -o example example.cc
 \end{lstlisting}
-Diese Befehle setzen voraus, dass auf ihrem System der GNU C++-Compiler installiert ist.
-Unter Windows oder für andere Compiler müssen Sie die Befehle entsprechend anpassen.
-\item Das Verzeichnis \lstinline{examples} im HDNUM-Ordner enthält viele Beispiele
-geordnet nach Programmierkurs, Numerik 0 und Numerik 1.
-\item Das Verzeichnis \lstinline{src} im HDNUM-Ordner enthält den Quellcode
-der HDNUM Bibliothek. Diese Dateien werden von \lstinline{hdnum.hh} eingebunden.
-\item Das Verzeichnis \lstinline{programmierkurs} im HDNUM-Ordner enthält
-die Folien zum Programmierkurs.
-\item Das Verzeichnis \lstinline{tutorial} im HDNUM-Ordner enthält den Quellcode
-für dieses Dokument.
+Otra forma es utilizar el comando \lstinline{make}, el cual ejecutará el archivo \lstinline{Makefile} que está en la carpeta, y el cual compilará el programa ejemplo, generando el archivo ejecutable \lstinline{example} que lo puede correr con \lstinline{./example}.
+
+Estos comandos requieren que el compilador GNU C ++ esté instalado en su sistema. En Windows o para otros compiladores, debe adaptar los comandos en consecuencia.
+
+\item El directorio \lstinline{examples} en la carpeta HDNUM contiene muchos ejemplos ordenados para el curso de programación, \lstinline{num0} y \lstinline{num1}.
+\item El directorio \lstinline{src} en la carpeta HDNUM contiene el código fuente de la biblioteca HDNUM. Estos archivos son utilizados por hdnum.hh cuando sea invocado.
+\item El directorio \lstinline{programmierkurs} en la carpeta HDNUM contiene el código fuente de este documento
+\item El directorio \lstinline{tutorial}  en la carpeta HDNUM contiene las diapositivas del curso de programación.
 \end{itemize}
 
 \subsubsection*{GNU Biblioteca de Multiple Precisión}
 
-HDNUM kann Berechnungen mit hoher Genauigkeit durchführen. Hierzu ist die GNU Multiple Precision
-Bibliothek (GMP) erforderlich,
-welche Sie für viele Systeme kostenlos erhalten können. Um GMP nutzen zu können müssen
-Sie in der Datei \lstinline{hdnum.hh} die Zeile
+HDNUM puede realizar cálculos con gran precisión. Esto requiere la biblioteca GNU Multiple Precision Library (GMP), que puede obtener de forma gratuita para muchos sistemas. Para poder utilizar GMP debe poner en el archivo \lstinline{hdnum.hh} la línea:
 \begin{lstlisting}[basicstyle=\ttfamily\small,frame=single]
 #define HDNUM_HAS_GMP 1
 \end{lstlisting}
-\textit{auskommentieren}. Zusätzlich sind eventuell Compileroptionen notwendig damit der Compiler
-die Headerdateien und Bibliotheken von GMP findet. Dies kann dann so aussehen:
+Además, las opciones del compilador pueden ser necesarias para que el compilador pueda encontrar las bibliotecas y los archivos de encabezado GMP. Entonces puede verse así:
 \begin{lstlisting}[basicstyle=\ttfamily\footnotesize,frame=single]
 $ g++ -I.. -I/opt/local/include -o example example.cc -L/opt/local/lib -lgmpxx -lgmp
 \end{lstlisting}
@@ -152,49 +135,48 @@ $ g++ -I.. -I/opt/local/include -o example example.cc -L/opt/local/lib -lgmpxx -
 \begin{frame}[fragile]
 \frametitle{\lstinline{hdnum::Vector<T>}}
 \begin{itemize}
-\item \lstinline{hdnum::Vector<T>} ist ein Klassen-Template.
-\item Es macht aus einem beliebigen (Zahl-)Datentypen \lstinline{T}
-  einen Vektor.
-\item Auch komplexe und hochgenaue Zahlen sind möglich.
-\item Vektoren verhalten sich so wie man es aus der Mathematik kennt:
+\item \lstinline{hdnum::Vector<T>} es una plantilla de Clase.
+\item Convierte cualquier (número)  tipo de datos \lstinline{T} en un vector. 
+\item También son posibles números complejos y muy precisos.
+\item Los vectores se comportan como los conocemos por las matemáticas:
 \begin{itemize}
-\item Bestehen aus $n$ Komponenten.
-\item Diese sind von $0$ bis $n-1$ (!) durchnummeriert.
-\item Addition und Multiplikation mit Skalar.
-\item Skalarprodukt und Euklidsche Norm
-\item Matrix-Vektor-Multiplikation
+\item Tiene $n$ componentes.
+\item Inicia en el elemento $0$ hasta el elemento $n-1$ numerados consecutivamente.
+\item Adición y multiplicación por un escalar.
+\item Producto escalar y norma Euclidiana.
+\item Multiplicación vector-matriz.
 \end{itemize}
-\item Die folgenden Beispiele findet man in \lstinline{vektoren.cc}
+\item Los siguientes ejemplos se pueden encontrar en el archivo \lstinline{vektoren.cc}
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Construcción y Acceso}
 \begin{itemize}
-\item Konstruktion mit und ohne Initialisierung\\
+\item Construcción con y sin Inicialización\\
 {\footnotesize{\begin{lstlisting}{}
-hdnum::Vector<float> x(10);        // Vektor mit 10 Elementen
-hdnum::Vector<double> y(10,3.14);  // 10 Elemente initialisiert
-hdnum::Vector<float> a;            // ein leerer Vektor
+hdnum::Vector<float> x(10);        // Vector con 10 elementos
+hdnum::Vector<double> y(10,3.14);  // Vector con 10 elementos inicializado
+hdnum::Vector<float> a;            // Vector vacío
 \end{lstlisting}}}
-\item Speziellere Vektoren\\
+\item Vectores más específicos\\
 {\footnotesize{\begin{lstlisting}{}
 hdnum::Vector<std::complex<double> >
   cx(7,std::complex<double>(1.0,3.0));
-mpf_set_default_prec(1024); // Setze Genauigkeit fuer mpf_class
+mpf_set_default_prec(1024); // Establece Precisión para  mpf_class
 hdnum::Vector<mpf_class> mx(7,mpf_class("4.44"));
 \end{lstlisting}}}
-\item Zugriff auf Element\\
+\item Acceso a un elemento\\
 {\footnotesize{\begin{lstlisting}{}
 for (std::size_t i=0; i<x.size(); i=i+1)
-  x[i] = i;                 // Zugriff auf Elemente
+  x[i] = i;                 // Acceso a cada elemento
 \end{lstlisting}}}
-\item Vektorobjekt wird am Ende des umgebenden Blockes gelöscht.
+\item El objeto vectorial se elimina al final del ciclo for.
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Kopie und Zuweisung}
+\frametitle{Copia y Asignación}
 \begin{itemize}
 \item Copy-Konstruktor: Erstellen eines Vektors als Kopie eines anderen
 {\footnotesize{\begin{lstlisting}{}
