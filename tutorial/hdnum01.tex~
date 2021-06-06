@@ -157,13 +157,13 @@ $ g++ -I.. -I/opt/local/include -o example example.cc -L/opt/local/lib -lgmpxx -
 {\footnotesize{\begin{lstlisting}{}
 hdnum::Vector<float> x(10);        // Vector con 10 elementos
 hdnum::Vector<double> y(10,3.14);  // Vector con 10 elementos inicializado
-hdnum::Vector<float> a;            // Vector vacío
+hdnum::Vector<float> a;            // Vector sin elementos
 \end{lstlisting}}}
 \item Vectores más específicos\\
 {\footnotesize{\begin{lstlisting}{}
 hdnum::Vector<std::complex<double> >
   cx(7,std::complex<double>(1.0,3.0));
-mpf_set_default_prec(1024); // Establece Precisión para  mpf_class
+mpf_set_default_prec(1024); // Establece precision para  mpf_class
 hdnum::Vector<mpf_class> mx(7,mpf_class("4.44"));
 \end{lstlisting}}}
 \item Acceso a un elemento\\
@@ -171,29 +171,29 @@ hdnum::Vector<mpf_class> mx(7,mpf_class("4.44"));
 for (std::size_t i=0; i<x.size(); i=i+1)
   x[i] = i;                 // Acceso a cada elemento
 \end{lstlisting}}}
-\item Vektorobjekt wird am Ende des umgebenden Blockes gelöscht.
+\item El objeto vectorial se elimina al final del ciclo for.
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Kopie und Zuweisung}
+\frametitle{Copia y Asignación}
 \begin{itemize}
-\item Copy-Konstruktor: Erstellen eines Vektors als Kopie eines anderen
+\item Constructor copia: crea una copia de otro vector
 {\footnotesize{\begin{lstlisting}{}
-hdnum::Vector<float> z(x); // z ist Kopie von x
+hdnum::Vector<float> z(x); // z es copia de x
 \end{lstlisting}}}
-\item Zuweisung, auch die Größe wird überschrieben!
+\item Asignación, ¡El tamaño también cambia!
 {\footnotesize{\begin{lstlisting}{}
-b = z;              // b kopiert die Daten aus z
-a = 5.4;            // Zuweisung an alle Elemente
-hdnum::Vector<double> w;   // leerer Vektor
-w.resize(x.size()); // make correct size
-w = x;              // copy elements
+b = z;              // b copia los datos de z 
+a = 5.4;            // asignacion a todos los elementos
+hdnum::Vector<double> w;   // Vector sin elementos
+w.resize(x.size()); // Redimiensiona el vector 
+w = x;              // Copia los elementos
 \end{lstlisting}}}
-\item Ausschnitte von Vektoren\\
+\item Extracto de vectores\\
 {\footnotesize{\begin{lstlisting}{}
-hdnum::Vector<float> w(x.sub(7,3));// w ist Kopie von x[7],...,x[9]
-z = x.sub(3,4);             // z ist Kopie von x[3],...,x[6]
+hdnum::Vector<float> w(x.sub(7,3));// w es una copia de x[7],...,x[9]
+z = x.sub(3,4);             // z es una copia de x[3],...,x[6]
 \end{lstlisting}}}
 \end{itemize}
 \end{frame}
