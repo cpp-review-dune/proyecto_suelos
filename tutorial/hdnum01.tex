@@ -215,17 +215,17 @@ s = w*z;           // Producto escalar
 {\footnotesize{\begin{lstlisting}{}
 std::cout << w << std::endl;// Salida por pantalla
 w.iwidth(2);                // Digitos en la salida del indice
-w.width(20);                // Anzahl Stellen gesamt
-w.precision(16);            // Anzahl Nachkommastellen
-std::cout << w << std::endl;// nun mit mehr Stellen
-std::cout <<cx << std::endl;// geht auch fuer complex
-std::cout <<mx << std::endl;// geht auch fuer mpf_class
+w.width(20);                // Definiendo la cantidad de digitos
+w.precision(16);            // Numero de posiciones decimales
+std::cout << w << std::endl;// Imprimiendo w
+std::cout <<cx << std::endl;// Imprimiendo complejos
+std::cout <<mx << std::endl;// Funciona para mpf_class
 \end{lstlisting}}}
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Beispielausgabe}
+\frametitle{Visualización}
 {\footnotesize{\begin{lstlisting}{}
 [   0]    1.204200e+01
 [   1]    1.204200e+01
@@ -240,23 +240,23 @@ std::cout <<mx << std::endl;// geht auch fuer mpf_class
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Hilfsfunktionen}
+\frametitle{Funciones auxiliares}
 {\footnotesize{\begin{lstlisting}{}
-float d = norm(w);          // Euklidsche Norm
-d = w.two_norm();           // das selbe
-zero(w);                    // das selbe wie w=0.0
-fill(w,(float)1.0);         // das selbe wie w=1.0
+float d = norm(w);          // Norma Euclidea
+d = w.two_norm();           // La misma norma
+zero(w);                    // Igual que w=0.0
+fill(w,(float)1.0);         // Igual que w=1.0
 fill(w,(float)0.0,(float)0.1); // w[0]=0, w[1]=0.1, w[2]=0.2, ...
-unitvector(w,2);            // kartesischer Einheitsvektor
-gnuplot("test.dat",w);      // gnuplot Ausgabe: i w[i]
-gnuplot("test2.dat",w,z);   // gnuplot Ausgabe: w[i] z[i]
+unitvector(w,2);            // Vector unitario cartesiano
+gnuplot("test.dat",w);      // Salida a gnuplo: i w[i]
+gnuplot("test2.dat",w,z);   // Saida a gnuplot: w[i] z[i]
 \end{lstlisting}}}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Funktionen}
+\frametitle{Funciones}
 \begin{itemize}
-\item Beispiel: Summe aller Komponenten\\
+\item Ejemplo: Suma de todas las componentes \\
 {\footnotesize{\begin{lstlisting}{}
 double sum (hdnum::Vector<double> x) {
   double s(0.0);
@@ -265,7 +265,7 @@ double sum (hdnum::Vector<double> x) {
   return s;
 }
 \end{lstlisting}}}
-\item Verbesserte Version mit \textbf{Funktionentemplate} und by-const-reference Übergabge\\
+\item Versión mejorada de la función con \textbf{template} y uso por referencia\\
 {\footnotesize{\begin{lstlisting}{}
 template<class T>
 T sum (const hdnum::Vector<T>& x) {
@@ -275,7 +275,7 @@ T sum (const hdnum::Vector<T>& x) {
   return s;
 }
 \end{lstlisting}}}
-\item By-value Übergabe ist be großen Objekten vorzuziehen
+\item El uso por referencia es mejor para objetos grandes.
 \end{itemize}
 \end{frame}
 
@@ -284,54 +284,53 @@ T sum (const hdnum::Vector<T>& x) {
 \begin{frame}[fragile]
 \frametitle{\lstinline{hdnum::DenseMatrix<T>}}
 \begin{itemize}
-\item \lstinline{hdnum::DenseMatrix<T>} ist ein Klassen-Template.
-\item Es macht aus einem beliebigen (Zahl-)Datentypen \lstinline{T}
-  eine Matrix.
-\item Auch komplexe und hochgenaue Zahlen sind möglich.
-\item Matrizen verhalten sich so wie man es aus der Mathematik kennt:
+\item \lstinline{hdnum::DenseMatrix<T>} Es una plantilla o Template de clase.
+\item Convierte un elemento tipo \lstinline{T} en una matriz.
+\item También es posible incluir complejos y su precisión.
+\item Las matrices son como las conocemos en matemáticas:
 \begin{itemize}
-\item Bestehen aus $m\times n$ Komponenten.
-\item Diese sind von $0$ bis $m-1$ bzw. $n-1$ (!) durchnummeriert.
-\item $m\times n$-Matrizen bilden einen Vektorraum.
-\item Matrix-Vektor und Matrizenmultiplikation.
+\item Dimensión de $m\times n$ .
+\item Inicia en elemento $0$ hasta $m-1$ o, hasta $n-1$ numerados consecutivamente.
+\item El conjunto de las matrices $m\times n$ constituyen un espacio vectorial.
+\item Multiplicación de vectores y de matrices.
 \end{itemize}
-\item Die folgenden Beispiele findet man in \lstinline{matrizen.cc}
+\item Los siguientes ejemplos se pueden encontrar en el archivo \lstinline{matrizen.cc}
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Construcción y acceso}
 \begin{itemize}
-\item Konstruktion mit und ohne Initialisierung\\
+\item Construcción con y sin inicialización \\
 {\footnotesize{\begin{lstlisting}{}
-hdnum::DenseMatrix<float> B(10,10);     // 10x10 Matrix uninitialisiert
-hdnum::DenseMatrix<float> C(10,10,0.0); // 10x10 Matrix initialisiert
+hdnum::DenseMatrix<float> B(10,10);     // 10x10 Matrix sin inicializar
+hdnum::DenseMatrix<float> C(10,10,0.0); // 10x10 Matrix inicializada
 \end{lstlisting}}}
-\item Zugriff auf Elemente\\
+\item Acceso a elementos\\
 {\footnotesize{\begin{lstlisting}{}
 for (int i=0; i<B.rowsize(); ++i)
   for (int j=0; j<B.colsize(); ++j)
-    B[i][j] = 0.0;          // jetzt ist B initialisiert
+    B[i][j] = 0.0;          // Ahora la matriz B está inicializada
 \end{lstlisting}}}
-\item Matrixobjekt wird am Ende des umgebenden Blockes gelöscht.
+\item El objeto matriz se elimina al final del ciclo.
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Copia y asignación}
 \begin{itemize}
-\item Copy-Konstruktor: Erstellen einer Matrix als Kopie einer anderen
+\item Constructor copia: Crea una matriz como copia de otra
 {\footnotesize{\begin{lstlisting}{}
-hdnum::DenseMatrix<float> D(B); // D Kopie von B
+hdnum::DenseMatrix<float> D(B); // D copia de B
 \end{lstlisting}}}
-\item Zuweisung, kopiert auch Größe mit
+\item Asignación y tamaño de las copias
 {\footnotesize{\begin{lstlisting}{}
-hdnum::DenseMatrix<float> A(B.rowsize(),B.colsize()); // korrekte Groesse
-A = B;                    // kopieren
+hdnum::DenseMatrix<float> A(B.rowsize(),B.colsize()); //Tamano correcto
+A = B;                    // Copia
 \end{lstlisting}}}
-\item Ausschnitte von Matrizen (Untermatrizen)\\
+\item Extractos de matrices (Submatrices)\\
 {\footnotesize{\begin{lstlisting}{}
-hdnum::DenseMatrix<float> F(A.sub(1,2,3,4));// 3x4 Mat ab (1,2)
+hdnum::DenseMatrix<float> F(A.sub(1,2,3,4));// 3x4  Submatriz (1,2)
 \end{lstlisting}}}
 \end{itemize}
 \end{frame}
@@ -339,27 +338,28 @@ hdnum::DenseMatrix<float> F(A.sub(1,2,3,4));// 3x4 Mat ab (1,2)
 \begin{frame}[fragile]
 \frametitle{Calculando con matrices}
 \begin{itemize}
-\item Vektorraumoperationen (Vorsicht: Matrizen sollten passende Größe haben!)\\
+\item Operaciones de espacio vectorial: Ojo, las matrices deben
+tener el tamaño correcto!)\\
 {\footnotesize{\begin{lstlisting}{}
 A += B;           // A = A+B
 A -= B;           // A = A-B
-A *= 1.23;        // Multiplikation mit Skalar
-A /= 1.23;        // Division durch Skalar
+A *= 1.23;        // Multiplicación por escalar
+A /= 1.23;        // División por escalar
 A.update(1.23,B); // A = A + s*B
 \end{lstlisting}}}
-\item Matrix-Vektor und Matrizenmultiplikation\\
+\item Matrices, Vectores y multiplicación de matrices\\
 {\footnotesize{\begin{lstlisting}{}
-hdnum::Vector<float> x(10,1.0); // make two vectors
+hdnum::Vector<float> x(10,1.0); // Construimos dos vectores
 hdnum::Vector<float> y(10,2.0);
 A.mv(y,x);               // y = A*x
 A.umv(y,x);              // y = y + A*x
 A.umv(y,(float)-1.0,x);  // y = y + s*A*x
 C.mm(A,B);               // C = A*B
 C.umm(A,B);              // C = C + A*B
-A.sc(x,1);               // mache x zur ersten Spalte von A
-A.sr(x,1);               // mache x zur ersten Zeile von A
-float d=A.norm_infty();  // Zeilensummennorm
-d=A.norm_1();            // Spaltensummennorm
+A.sc(x,1);               // Hace x la primera columna de A
+A.sr(x,1);               // Hace x la primera fila de A
+float d=A.norm_infty();  // Halla la norma de la suma de las filas
+d=A.norm_1();            // Halla la norma de la suma de las columnas
 \end{lstlisting}}}
 \end{itemize}
 \end{frame}
@@ -367,15 +367,15 @@ d=A.norm_1();            // Spaltensummennorm
 \begin{frame}[fragile]
 \frametitle{Funciones de salida auxiliares}
 \begin{itemize}
-\item Ausgabe von Matrizen\\
+\item Salida de matrices \\
 {\footnotesize{\begin{lstlisting}{}
-std::cout << A.sub(0,0,3,3) << std::endl;// schöne Ausgabe
-A.iwidth(2);                // Stellen in Indexausgabe
-A.width(10);                // Anzahl Stellen gesamt
-A.precision(4);             // Anzahl Nachkommastellen
-std::cout << A << std::endl;// nun mit mehr Stellen
+std::cout << A.sub(0,0,3,3) << std::endl;// Impresion
+A.iwidth(2);                // Digitos en la salida del indice
+A.width(10);                // Numero total de digitos
+A.precision(4);             // Posiciones decimales
+std::cout << A << std::endl;// Nueva publicacion
 \end{lstlisting}}}
-\item einige Hilfsfunktionen
+\item Algunas funciones auxiliares 
 {\footnotesize{\begin{lstlisting}{}
 identity(A);
 spd(A);
@@ -398,8 +398,8 @@ vandermonde(A,x);
 
 \begin{frame}[fragile]
 \frametitle{Funciones con argumentos matriciales}
-Beispiel einer Funktion, die eine Matrix $A$ und einen Vektor $b$
-initialisiert.
+Ejemplo de una función de una matriz $A$ y de un vector  $b$
+inicializados.
 
 {\footnotesize{\begin{lstlisting}{}
 template<class T>
@@ -418,49 +418,35 @@ void initialize (hdnum::DenseMatrix<T>& A, hdnum::Vector<T>& b)
 }
 \end{lstlisting}}}
 \end{frame}
+En la siguiente sección se tratan los solucionadores de sistemas de ecuaciones.
+Si el sistema de ecuaciones es lineal, se utiliza el método de descomposición LR 
+o QR.  En el caso no lineal, como por ejemplo en el archivo num1, que utiliza 
+iteraciones de punto fijo, se utiliza el método de Newton.
 
-Im Folgenden geht es um Löser für Gleichungssysteme. Ist das zu
-lösende Gleichungssystem linear, so verwendet man eine LR- oder
-QR-Zerlegung. Im nichtlinearen Fall, der beispielsweise bei den in
-Numerik 1 behandelten impliziten Runge-Kutta Verfahren auftritt, macht
-man sich Fixpunktiterationen, wie z.B. im Newtonverfahren zunutze.
-
-La siguiente sección trata sobre solucionadores  de sistemas de ecuaciones. 
-Sirven para resolver un sistema de ecuaciones lineales, se usa un LR o la 
-descomposición QR. En el caso no lineal, que es el caso de los métodos
-Numéricos 1 tratados implícitamente ocurre el procedimiento de Runge-Kutta, hace
-uno usa iteraciones de punto fijo, por ejemplo, en el método de Newton.
-
-\subsection{LR Desmontaje}
+\subsection{Método LR}
 
 \subsubsection{Breve explicación del algoritmo}
+El método de descomposición LR se utiliza para resolver un sistema
+de ecuaciones de la forma $Ax=b$. Se busca descomponer la matriz de coeficientes 
+$A$ que es cuadrada en dos matrices, una matriz $L$ matriz triangular inferior y 
+otra matriz $R$ matriz triangular superior, de tal forma que el producto sea
+$A=LR$. Cuando es necesario realizar intercambio de filas ésto conduce a un 
+sistema de la forma $PA = LR$.  Los pivotes aseguran que los elementos de la Diagonal 
+no son cero, de lo contrario no se puede usar el algorítmo.
 
-Die LR-Zerlegung wird angewandt, um ein Gleichungssystem der Form
-$Ax=b$ zu lösen. Dabei wird die reguläre, quadratische Matrix $A$ in
-eine linke untere Dreiecksmatrix $L$ und in eine rechte obere
-Dreiecksmatrix $R$ Zerlegt, sodass $A=LR$. Zusätzlich ist meistens
-eine Pivotisierung erforderlich, womit man schließlich auf das System
-$PA=LR$ kommt. Durch diese Pivotisierung ist sichergestellt, dass das
-Diagonalelement der Matrix ungleich null ist, denn sonst könnten wir
-unseren Algorithmus nicht anwenden.
+Por un lado, se hace una distinción entre pivotamiento parcial, que asegura que el
+elemento más grande de la columna debajo de la diagonal en términos de cantidad se
+intercambie en la diagonal mediante permutaciones de fila. Con la rotación total, uno mira la
+matriz completa debajo de la diagonal y busca el elemento más grande en términos de
+cantidad para cambiarlo a la entrada de la diagonal actual usando operaciones de fila y
+columna. El elemento más grande en términos de valor absoluto se elige para reducir los
+errores numéricos.
 
-Dabei unterscheidet man zum einen die Partialpivotisierung, bei der
-sichergestellt wird, dass das betragsmäßig größte Element der Spalte
-unterhalb der Diagonale durch Zeilenpermutationen auf die Diagonale
-getauscht wird. Bei der Totalpivotisierung betrachtet man die ganze
-Matrix unterhalb der Diagonalen und sucht dort das betragsmäßig größte
-Element, um es durch Zeilen- und Spaltenoperationen auf den aktuellen
-Diagonaleintrag zu tauschen. Das betragsmäßig größte Element wird
-gewählt, um numerische Fehler zu verringern.
-
-\subsubsection{LR Como hacer el desmontaje}
-
-Will man ein Programm schreiben, dass ein lineares Gleichungssystem
-der Form $Ax=b$ mittels LR-Zerlegung der Matrix $A$ löst, ist wie
-folgt vorzugehen:
+\subsubsection{Como hacer la descomposición LR}
+Para hacer un programa que resuelva un sistema $Ax=b$ utilizando la descomposición 
+LR, se procede de la siguiente forma:
 \begin{itemize}
-\item Zu Beginn erstellt man den Rechteseitevektor $b$ und die Matrix
-  $A$. Dies sieht zum Beispiel so aus:
+\item Se crea el vector $b$ y la matriz $A$. veamos el siguiente ejemplo:
 
   {\footnotesize{\begin{lstlisting}{}
 Vector<number> b(3);
@@ -474,12 +460,10 @@ A[1][0]=8;   A[1][1]=8;   A[1][2]=33;
 A[2][0]=-4;  A[2][1]=10;  A[2][2]=4;
 \end{lstlisting}}}
 
-\item Zusätzlich benötigen wir Vektoren $x$ und $p$. Falls eine
-  Totalpivotisierung durchgeführt wird, ist ein weiterer Vektor $q$ zu
-  erstellen. Um die Kondition der Matrix zu verbessern können die
-  Funktionen \lstinline{row_equilibrate} sowie
-  \lstinline{apply_equilibrate} angewendet werden, für die ein
-  zusätzlicher Vektor $s$ benötigt wird:
+\item Además, necesitamos los vectores $x$ y $p$. Si se realiza un pivoteo total, 
+se debe crear otro vector $q$. Para mejorar la condición de la matriz, 
+las funciones \lstinline{row_equilibrate} y \lstinline{apply_equilibrate} se pueden necesitar
+para lo cual se requiere un vector adicional $s$:
 
   {\footnotesize{\begin{lstlisting}{}
 Vector<number> x(3,0.0);
@@ -488,62 +472,54 @@ Vector<std::size_t> p(3);
 Vector<std::size_t> q(3);
 \end{lstlisting}}}
 
-\item Wie bereits im vorangegangenen Punkt erwähnt, kann zu Beginn die
-  Kondition der Matrix $A$ verbessert werden. Dies geschieht mithilfe
-  der Funktionen \lstinline{row_equilibrate} und
-  \lstinline{apply_equilibrate}. Wie diese angewendet werden, kann man
-  in den nachfolgenden Punkten sehen.
+\item Como ya se mencionó en el punto anterior, el condicionamiento de la matriz $A$ 
+  se puede mejorar desde el principio. Esto se hace usando las funciones \lstinline{row_equilibrate}
+  y \lstinline{apply_equilibrate}. La aplicación de los comandos se puede ver en los siguientes ejemplos.
 
-\item Nun wendet man eine der folgenden  Funktionen auf die Matrix $A$
-  und den zuvor erstellten Permutationsvektor $p$ an. In unserem
-  Beispiel führen wir eine Totalpivotisierung durch, weshalb wir den
-  zusätzlichen Vektor $q$ benötigen:
-
+\item Ahora se aplica una de las siguientes funciones a la matriz $A$ y al vector de permutación 
+$p$ creado previamente. En nuestro ejemplo realizamos un pivoteo total, por lo que 
+necesitamos el vector adicional $q$:
   {\footnotesize{\begin{lstlisting}{}
 row_equilibrate (A,s);
 lr_fullpivot(A,p,q);
 \end{lstlisting}}}
+La función \lstinline{lr_partialpivot} se utilizará para el pivoteo parcial 
+y la función \lstinline{lr} se utilizará para la descomposición LR sin pivotar.
+(El vector de permutación adicional $q$ no es necesario aquí.) Ahora podemos 
+usar el sistema de ecuaciones para resolver distintos lados derechos.
 
-  Für eine Partialpivotisierung ist die Funktion
-  \lstinline{lr_partialpivot}, für eine LR-Zerlegung ohne Pivotisierung
-  die Funktion \lstinline{lr} zu verwenden. (Hierbei ist der zusätzliche
-  Permutationsvektor $q$ nicht notwendig.)  Jetzt können wir das
-  Gleichungssystem für viele unterschiedliche rechte Seiten lösen.
-
-\item Dafür müssen wir die rechte Seite wie folgt vorbereiten:
+\item Para esto necesitamos preparar el lado derecho de la siguiente forma:
 
 {\footnotesize{\begin{lstlisting}{}
 apply_equilibrate(s,b);
 permute_forward(p,b);
 \end{lstlisting}}}
 
-\item Daraufhin rufen wir die Funktion \lstinline{solveL} auf, die als
-  Parameter die Matrix $A$, den Rechteseitevektor $b$ und einen Vektor
-  $y$ bekommt, in dem die Lösung des Gleichungssystems $Ly=b$
-  gespeichert wird. Um Speicherplatz zu sparen können wir das Ergebnis
-  gleich in den bereits vorhandenen Vektor $b$ schreiben.
+\item Luego llamamos a la función \lstinline{solveL}, que recibe la matriz $A$, 
+el vector de la derecha por un vector $y$ como parámetros en los que 
+se almacena la solución del sistema de ecuaciones $Ly = b$. 
+Para ahorrar espacio de almacenamiento se puede 
+escribir el resultado en el vector ya existente $b$.
 
-\item Schließlich wird noch die Funktion \lstinline{solveR} benötigt,
-  die das Gleichungssystem $Rx=y$ löst. Die Funktion braucht als
-  Parameter die Matrix $A$, den Rechteseitevektor $y$ (des
-  Gleichungssystems $Ly=b$) sowie den Vektor $x$, in dem das
-  endgültige Ergebnis gespeichert wird:
+\item Finalmente, se requiere la función \lstinline{solveR}, que resuelve el 
+sistema de ecuaciones $Rx = y$. La función necesita la matriz $A$, el vector de la 
+derecha y (del sistema de ecuaciones $Ly = b$) así como el vector $x$, 
+en el que se guarda el resultado final:
 
   {\footnotesize{\begin{lstlisting}{}
 solveL(A,b,b);
 solveR(A,x,b);
 \end{lstlisting}}}
 
-\item Falls eine Totalpivotisierung vorgenommen wurde, müssen zum
-  Schluss die Permutationen, die im Vektor $q$
-  (Spaltentransvormationen von $A$) gespeichert wurden, auf das
-  Ergebnis $x$ mittels \lstinline{permute_backward} angewendet werden:
+\item Si se ha realizado un pivoteo total, las permutaciones que se almacenaron
+ en el vector $q$ (transformaciones de columna de $A$) deben aplicarse al resultado
+ $x$ usando \lstinline{permute_backward}:
+
   {\footnotesize{\begin{lstlisting}{} permute_backward(q,x);
 \end{lstlisting}}}
 
-\item Die Lösung des linearen Gleichungssystems ist nun im Vektor $x$
-  gespeichert. In unserem Fall:
-
+\item La solución del sistema lineal de ecuaciones ahora se almacena en el vector x. 
+En nuestro caso:
     {\footnotesize{\begin{lstlisting}{}
 x[0] = 1
 x[1] = 2
@@ -555,14 +531,13 @@ x[2] = 3
 
 \subsection{Explicaciones detalladas del algoritmo \lstinline{lr.hh}}
 \begin{itemize}
-\item \textbf{Die Funktion \lstinline{lr}}: Zu Beginn wird bei allen
-  Funktionen überprüft, ob eine quadratische, nichtleere Matrix
-  vorliegt und ob der Vektor $p$ mit der gegebenen Matrix kompatibel
-  ist.  In der ersten $for$-Schleife wird eine Zeile der Matrix
-  gesucht, deren Diagonalelement ungleich null ist. Anschließend wird
-  diese Zeile mit der des aktuellen Diagonalelements getauscht. Die
-  Permutationen, welche durch die Pivotsuche entstehen, werden im
-  Vektor $p$ gespeichert.
+\item \textbf{La función \lstinline{lr}}: Al principio se comprueba para todas 
+las funciones si existe una matriz cuadrada no vacía y si el vector $p$ 
+es compatible con la matriz dada. El primer bucle for busca una fila de
+la matriz cuyo elemento diagonal no sea igual a cero. A continuación, 
+esta línea se compara con la de la corriente Todos los elementos diagonales
+intercambiados. Las permutaciones que resultan de la búsqueda pivote 
+se almacenan en el vector $p$.
 
 {\footnotesize{\begin{lstlisting}{}
 for (std::size_t k=0; k<A.rowsize()-1; ++k)
