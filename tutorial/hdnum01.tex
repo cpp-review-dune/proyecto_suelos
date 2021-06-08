@@ -568,19 +568,16 @@ for (std::size_t k=0; k<A.rowsize()-1; ++k)
 }
 \end{lstlisting}}}
 
-  In der zweiten $for$-Schleife wird dann die obere Dreiecksmatrix mit
-  dem permutierten A erstellt.
+  En el segundo ciclo $for$, se crea la matriz triangular con la matriz A
+  permutada.
 
-\item \textbf{Die Funktion \lstinline{lr_partialpivot}}:Parameter:
-  Matrix $A$ sowie Permutationsvektor $p$.  Diese Funktion führt eine
-  partielle Pivotisierung durch. Dabei geht sie wie folgt vor:
-  Zunächst wird der Vektor $p$ initialisiert, indem er mit den Werten
-  $0$ bis $n-1$ (wobei
-  $A \in \mathbb{R^{\mathrm{n}\times \mathrm{n}}}$) beschrieben
-  wird. Danach wird in der Matrix $A$ das Pivotelement (betragsmäßig
-  größte Element) in der aktuellen Spalte unterhalb des
-  Diagonalelementes gesucht und die erforderliche Permutation um
-  dieses auf die Diagonale zu tauschen im Vektor $p$ gespeichert:
+\item \textbf{La función \lstinline{lr_partialpivot}}: Parametros :
+  Matriz $A$ y vector de permutación $p$.  Ésta función realiza un pivoteo parcial.
+  Procede de la siguiente manera: Primero, el vector $p$ se inicializa describiéndolo
+  con los valores de $0$ a $n-1$ (Donde $A \in \mathbb{R^{\mathrm{n}\times \mathrm{n}}}$).  
+  Luego, el elemento pivote (el elemento más grande en términos de magnitud) se busca en la columna actual
+  debajo del elemento diagonal en la matriz $A$ y la permutación requjerida para cambiarlo
+  a la diagonal que se almacena en el vector $p$:
 
 {\footnotesize{\begin{lstlisting}{}
 for (std::size_t k=0; k<A.rowsize()-1; ++k)
@@ -591,21 +588,17 @@ for (std::size_t k=0; k<A.rowsize()-1; ++k)
     p[k] = r; // speichert Permutation im Schritt k
 }
 \end{lstlisting}}}
+  En el siguiente ciclo, las líneas $k$ y $j$ se intercambian de modo que 
+  el elemento pivote se encuentre en la diagonal.
 
-  In der darauffolgenden Schleife werden die Zeilen $k$ und $j$
-  getauscht, sodass das Pivotelement auf der Diagonalen liegt.
+\item  \textbf{La función \lstinline{lr_fullpivot}}: Funciona de manera similar a la función 
+  anterior \lstinline{lr_partialpivot}, pero necesita un vector adicional $q$ para poder realizar un pivoteo total. 
+  No solo es posible intercambiar filas, sino también intercambiar columnas, 
+  que se almacenan en el vector $q$.
 
-\item \textbf{Die Funktion \lstinline{lr_fullpivot}}: Diese Funktion
-  geht ähnlich wie die Funktion \lstinline{lr_partialpivot} vor,
-  allerdings braucht sie einen zusätzlichen Vektor $q$, um eine
-  Totalpivotisierung durchzuführen. Hierbei sind nicht nur Zeilen-
-  sondern auch Spaltenvertauschungen möglich, welche im Vektor $q$
-  gespeichert werden.
-
-\item \textbf{Die Funktion \lstinline{permute_forward}}: Der Vektor
-  $p$ hat die notwendigen Permutationen gespeichert. In dieser
-  Funktion werden die Zeilenpermutationen auf den Vektor $b$
-  übertragen:
+\item \textbf{La función \lstinline{permute_forward}}: 
+  El vector $p$ ha almacenado las permutaciones necesarias. En esta función, las permutaciones 
+  de línea se transfieren al vector:
 
 {\footnotesize{\begin{lstlisting}{}
 for (std::size_t k=0; k<b.size()-1; ++k)
@@ -617,17 +610,13 @@ for (std::size_t k=0; k<b.size()-1; ++k)
   }
 \end{lstlisting}}}
 
-\item \textbf{Die Funktion \lstinline{permute_backward}}: Diese
-  Funktion wird am Ende der Lr-Zerlegung angewendet, um die in der
-  Funktion \lstinline{permute_forward} vorgenommenen Permutationen
-  beim Rechteseitevektor wieder rückgängig zu machen.
+\item \textbf{La función \lstinline{permute_backward}}: 
+  Ésta función se utiliza al final del algorítmo LR para deshacer las permutaciones 
+  realizadas en la función \lstinline{permute_forward} para el vector de la derecha.
 
-
-\item \textbf{Die Funktion \lstinline{row_equilibrate}}: Diese
-  Funktion wird vor dem eigentlichen Algorithmus angewendet, um die
-  Kondition der Matrix zu verbessern (Equilibration).  Die Werte,
-  durch die die Zeilen der Matrix dividiert werden, sind im Vektor $s$
-  gespeichert:
+\item \textbf{La función \lstinline{row_equilibrate}}: 
+  Esta función se utiliza antes del algoritmo actual para mejorar la condición de la matriz de 
+  (equilibrio). Los valores por los que se dividen las filas de la matriz se almacenan en el vector $s$:
 
 {\footnotesize{\begin{lstlisting}{}
 for (std::size_t k=0; k<A.rowsize(); ++k)
@@ -642,14 +631,13 @@ for (std::size_t k=0; k<A.rowsize(); ++k)
 \end{lstlisting}}}
 
 
-\item \textbf{Die Funktion \lstinline{apply_equilibrate}}: Die
-  Veränderungen, die an der Matrix $A$ durchgeführt wurden, werden
-  hier ebenfalls auf den Vektor $b$ angewandt, um die Lösung nicht zu
-  verfälschen.
+\item \textbf{La función \lstinline{apply_equilibrate}}: 
+  Los cambios que se hicieron a la matriz $A$ también se aplican aquí al vector $b$ 
+  para obtener la solución correcta.
 
-\item \textbf{Die Funktion \lstinline{solveL}}: Parameter: Vektor $x$
-  und Rechteseitevektor $b$.  Diese Funktion löst die Gleichung
-  $Lx=b$. Dabei wird $x$ folgendermaßen, iterativ bestimmt:
+\item \textbf{La función \lstinline{solveL}}: Paramétros : Vector $x$
+  y el vector  $b$.  Ésta función resuelve la ecuación $Lx=b$. Aquí $x$ se 
+  determina iterativamente de la siguiente forma:
   $x_i= b_i - \sum_{j=0}^{i-1} l_{ij}x_j$
 
 {\footnotesize{\begin{lstlisting}{}
@@ -662,9 +650,10 @@ for (std::size_t i=0; i<A.rowsize(); ++i)
 }
 \end{lstlisting}}}
 
-\item \textbf{Die Funktion \lstinline{solveR}}: Diese Funktion löst
-  die Gleichung $Rx=b$. Dabei wird $x$ folgendermaßen bestimmt:
-  $x_i= b_i - \sum_{j=i+1}^{n-1}r_{ij}x_j$ (hierbei ist
+\item \textbf{La función \lstinline{solveR}}: 
+  Ésta función resuelve la ecuación $Rx=b$. 
+  Por lo tanto el vector $x$ se determina de la siguiente manera:
+  $x_i= b_i - \sum_{j=i+1}^{n-1}r_{ij}x_j$ (aquí está
   $R \in \mathbb{R}^{n \times n}$)
 
 {\footnotesize{\begin{lstlisting}{}
