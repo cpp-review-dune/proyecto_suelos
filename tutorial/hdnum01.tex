@@ -670,29 +670,24 @@ for (int i=A.rowsize()-1; i>=0; --i)
 
 
 
-\subsection{Iterationsverfahren - die Datei \lstinline{newton.hh}}
+\subsection{Método de iteración - archivo \lstinline{newton.hh}}
 
-Jetzt wissen wir, wie wir lineare Gleichungssysteme der Form $Ax = b$
-lösen können. Was ist jedoch zu tun, wenn das Gleichungssystem nicht
-linear ist, z.B. im simplen, eindimensionalen Fall $x^2 = a$? In der
-Vorlesung lernt man Verfahren, die sich Fixpunktiterationen zunutze
-machen, um der Lösung sehr nahe zu kommen. Die Datei
-\lstinline{newton.hh} stellt hilfreiche Werkzeuge bereit, um derartige
-Gleichungen und Gleichungssystem zu lösen. Das wichtigste ist das
-Newtonverfahren, mit dem man nichtlineare Gleichungen der Form
-$F(x) = 0$ lösen kann. Zunächst betrachten wir jedoch die konkrete
-Formulierung eines Problems in einer Klasse.
+  Ahora sabemos cómo resolver sistemas lineales de ecuaciones de la forma $Ax = b$. 
+  Pero, ¿qué se debe hacer si el sistema de ecuaciones no es lineal, por ejemplo, 
+  en el caso simple y unidimensional $x^2 = a$? En la lección aprenderá procedimientos 
+  que utilizan iteraciones de punto fijo para acercarse mucho a la solución. 
+  El archivo \lstinline{newton.hh} proporciona herramientas útiles para resolver este tipo de ecuaciones 
+  y sistemas de ecuaciones.  El más importante es el método de Newton, con el que se pueden resolver ecuaciones 
+  no lineales de la forma $F (x) = 0$. Pero primero consideramos la formulación concreta 
+  de un problema en una clase.
 
+\subsubsection{La clase  \lstinline{SquareRootProblem}}
 
-
-\subsubsection{Die Klasse \lstinline{SquareRootProblem}}
-Um ein nichtlineares Gleichungssystem der Form $f(x)=0$ lösen zu
-können müssen wir zu Beginn eine Klasse für unser Problem
-erstellen. Diese benötigt neben einem geeigneten Konstruktor und den
-Angaben über die Dimension des Problems eine Methode, die den
-Funktionswert bereitstellt, und eine andere, welche die Ableitung der
-Funktion bereitstellt.  Wir zeigen dies beispielhaft an der Klasse
-SquareRootProblem:
+  Para poder resolver un sistema no lineal de ecuaciones de la forma $f (x) = 0$, 
+  primero debemos crear una clase para nuestro problema. Además de un constructor 
+  adecuado e información sobre la dimensión del problema, esto requiere un método 
+  que proporcione el valor de la función y otro que proporcione la derivada de la función. 
+  Mostramos esto con el ejemplo de la clase SquareRootProblem:
 
 {\footnotesize{\begin{lstlisting}{}
 class WurzelProblem
@@ -719,24 +714,23 @@ typedef std::size_t size_type;
 typedef N number_type;
 \end{lstlisting}}}
 
-Bei den Typedefs am Anfang handelt es sich zwar nicht um Methoden,
-diese sind jedoch ebenso wichtig. Wir wissen von vornherein nicht,
-welcher Datentyp letztlich verwendet wird. Die Typedefs sind da, damit
-der Solver später erkennen kann, mit welchem Zahlentyp die Klasse
-eigentlich arbeitet.
+Las definiciones de tipo al principio no son métodos, pero son igualmente importantes. 
+No sabemos de antemano qué tipo de datos se utilizará en última instancia. Las definiciones 
+de tipo están ahí para que el solucionador pueda reconocer más tarde con qué tipo de 
+número está trabajando realmente la clase.
 
-\item Konstruktor:
+
+\item Constructor:
   {\footnotesize{\begin{lstlisting}{}
 WurzelProblem::WurzelProblem (number_type a_)
 : a(a_)
 {}
 \end{lstlisting}}}
 
-Damit haben wir die Möglichkeit unterschiedliche Probleme der Form
-$x^2=a$ zu lösen, indem wir dem Konstruktor das gewünschte a
-übergeben.
+Esto nos da la oportunidad de resolver varios problemas de la forma 
+$x^2=a$ pasando la $a$ deseada al constructor.
 
-\item Dimension:
+\item Dimensión:
 
   {\footnotesize{\begin{lstlisting}{}
 std::size_t Wurzelproblem::size () const
@@ -745,7 +739,7 @@ std::size_t Wurzelproblem::size () const
 }
 \end{lstlisting}}}
 
-\item Funktionswert: $f(x)=x^2-a$:
+\item Valor de la función: $f(x)=x^2-a$:
 
   {\footnotesize{\begin{lstlisting}{}
 void Wurzelproblem::F (const Vector<N>& x, Vector<N>& result) const
@@ -754,8 +748,8 @@ void Wurzelproblem::F (const Vector<N>& x, Vector<N>& result) const
 }
 \end{lstlisting}}}
 
-Wir benötigen diese spezielle Form, da wir nur Probleme der Form
-$f(x)=0$ lösen können.
+Necesitamos esta forma especial porque solo podemos resolver problemas de la forma $f (x) = 0$.
+
 
 \item Ableitung: $f'(x)=2x$:
   {\footnotesize{\begin{lstlisting}{}
@@ -765,17 +759,17 @@ void Wurzelprobelem::F_x (const Vector<N>& x,
   result[0][0] = number_type(2.0)*x[0];
 }
 \end{lstlisting}}}
-(Die Ableitung muss manuell berechnet werden.)
+(La derivada debe calcularse manualmente.)
 \end{itemize}
 
 \noindent
-Nachdem wir unsere Problemklasse erstellt haben, können wir nun ein
-Objekt dieser Klasse z.B. das Problem $x^2=5$ erstellen und dieses mit
-dem Newtonalgorithmus lösen. Dazu gehen wir wie folgt vor:
+Ahora que hemos creado nuestra clase, debemos crear el objeto z.B del problema 
+$x^2=5$, crear y resolver esto con el método de Newton.  Para ello,
+procedemos de la siguiente manera:
+
 \begin{itemize}
-  \item Objekt der Klasse \lstinline{WurzelProblem} mit dem Namen
-    \glqq problem\grqq{} erstellen, welches die Gleichung $x^2=5$
-    repräsentiert:
+  \item Crear el objeto del problema con \lstinline{WurzelProblem} con el nombre
+     "problem", que representa la ecuación $x^2=5$:
 
   {\footnotesize{\begin{lstlisting}{}
 WurzelProblem<Number> problem(5.0);
@@ -783,53 +777,44 @@ WurzelProblem<Number> problem(5.0);
 \end{itemize}
 
 \noindent
-Nun müssen wir ein Objekt der Klasse Newton erstellen und diverse
-Parameter setzen:
+Ahora tenemos que crear un objeto de la clase Newton y establecer varios parámetros:
 
-\subsubsection{Die Klasse \lstinline{Newton}}
+\subsubsection{Clase \lstinline{Newton}}
 \begin{itemize}
-\item Folgendermaßen kann man eine Instanz der Klasse
-  \lstinline{Newton} erstellen und alle Parameter setzen:
+\item De la siguiente manera, puede crear una instancia de la clase \lstinline{Newton} y establecer todos los parámetros:
 
     {\footnotesize{\begin{lstlisting}{}
-Newton newton;                    // Ein Newtonobjekt
-newton.set_maxit(20);             // maximale Anzahl der Iteratioenen
-newton.set_verbosity(2);          // Ausfuehrlichkeit der Ausgaben
-newton.set_reduction(1e-100);     // Reduktionsfaktor
-newton.set_abslimit(1e-100);      // maximaler absoluter Fehler
-newton.set_linesearchsteps(3);    // Wie viele Schritte fuer Linesearch
+Newton newton;                    // Crea un objeto newton
+newton.set_maxit(20);             // Numero maximo de iteraciones 
+newton.set_verbosity(2);          // Detalle del gasto
+newton.set_reduction(1e-100);     // Factor de reduccion
+newton.set_abslimit(1e-100);      // Maximo error en valor absoluto
+newton.set_linesearchsteps(3);    // Numero maximo de pasos para la busqueda
 \end{lstlisting}}}
 
-\item Schließlich benötigen wir noch einen Vektor $u$, in dem die
-  Lösung gespeichert wird. Dieser muss die selbe Größe wie unser
-  Problem haben:
+\item Finalmente necesitamos un vector $u$, en el que se almacena la solución. 
+Éste debe teber el mismo tamaño que nuestro problema:
 
   {\footnotesize{\begin{lstlisting}{}
 Vector<Number> u(problem.size());
 \end{lstlisting}}}
 
-\item Den Startwert für das Newton Verfahren setzten wir hier auf
-  17. Es kann natürlich auch ein anderer Wert gewählt werden, man muss
-  allerdings beachten, dass der Startwert nicht zu weit von der Lösung
-  entfernt ist, da das Newton-Verfahren nicht global konvergent ist.
-
+\item Aquí establecemos el valor inicial para el método de Newton en $17$ Por supuesto, se puede seleccionar otro valor, pero debe asegurarse de que el valor inicial no esté demasiado lejos de la solución, ya que el método de Newton no es globalmente convergente.
   {\footnotesize{\begin{lstlisting}{}
 u[0]=17.0;
 \end{lstlisting}}}
 
-\item Jetzt können wir die Methode \lstinline{solve} der Klasse Newton
-  auf unser Problem anwenden:
+\item Ahora podemos aplicar el método lstinline{solve} de la clase de \lstinline{Newton} a nuestro problema:
 
   {\footnotesize{\begin{lstlisting}{}
 newton.solve(problem,u);
 \end{lstlisting}}}
 
-\item Wir bekommen als Lösung dieses speziellen Wurzelproblems das Ergebnis:\\
+\item Como solución a este problema raíz en particular, obtenemos el resultado:\\
   $u= 2.2361e+00$
 \end{itemize}
 
-Man kann solche Probleme nicht nur mit dem Newton-Verfahren lösen, wie
-bereits gesehen, sondern auch mittels der Klasse \lstinline{Banach}.
+Se pueden resolver estos problemas no solo con el método de Newton, como ya se ha visto, sino también con la ayuda de la clase \lstinline{Banach}.
 
 \subsubsection{Ausführliche Erläuterungen zur Klasse Newton}
 
