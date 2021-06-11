@@ -816,21 +816,15 @@ newton.solve(problem,u);
 
 Se pueden resolver estos problemas no solo con el método de Newton, como ya se ha visto, sino también con la ayuda de la clase \lstinline{Banach}.
 
-\subsubsection{Ausführliche Erläuterungen zur Klasse Newton}
+\subsubsection{Explicaciones detalladas de la clase Newton}
+La clase Newton consiste escencialmente de un método \lstinline{solve} que se puede
+utilizar para resolver sistemas de ecuaciones no lineales. Además de éste método,
+también hay algunos parámetros de procedimiento, como el número máximo de iteraciones,
+que se pueden configurar en el constructor.
 
-Die Klasse Newton besteht im Wesentlichen aus einer Methode
-\lstinline{solve} welche zum Lösen von nichtlinearen Gleichungen
-benutzt werden kann. Neben dieser Methode gibt es noch einige
-Verfahrens-Parameter wie die maximale Iterationsanzahl, welche im
-Konstruktor gesetzt werden können.
-
-Beim Lösen wird zuerst überprüft ob das Residuum $r=F(x)$ bereits
-kleiner oder gleich der Schranke \lstinline{abslimit} ist. Ist dies
-der Fall, so ist der Startwert bereits gut genug und wir sind
-fertig. Im anderen Fall wird mittels der LR-Zerlegung die nächste
-Suchrichtung $\bigtriangledown f(x_k)^{-1}f(x_k) = z_k$
-bestimmt. Mittels einer simplen Line-Search Methode wird ein
-geeignetes $\lambda$ bestimmt und $x_{k+1}=x_k-\lambda z_k$ gesetzt.
+Para resolver, primero se comprueba si el residuo $r=F(x)$ ya es menor que el error \lstinline{abslimit}. Si es así, el valor inicial ya es suficientemente aceptable y el proceso ha terminado. En otro caso, la dirección de búsqueda se determina utilizando la descomposición $LR$ 
+$\bigtriangledown f(x_k)^{-1}f(x_k) = z_k$ definitivamente.  Usando un método de búsqueda de línea
+simple y un $\lambda$ apropiado en $x_{k+1}=x_k-\lambda z_k$
 
 {\footnotesize{\begin{lstlisting}{}
 for (size_type k=0; k<linesearchsteps; k++)
@@ -838,16 +832,16 @@ for (size_type k=0; k<linesearchsteps; k++)
   y = x;
   y.update(-lambda,z);                       // y = x-lambda*z
   model.F(y,r);                              // r = F(y)
-  N newR(norm(r));                           // berechnet Norm
+  N newR(norm(r));                           // Norma calculada
 }
-if (newR<(1.0-0.25*lambda)*R)                // pruefe Konvergenz
+if (newR<(1.0-0.25*lambda)*R)                // Comprobacion de la convergencia
 {
   x = y;
   R = newR;
   break;
 }
-else lambda *= 0.5;                          // reduziert Daempgungsfaktor
-if (R<=reduction*R0)                         // pruefe Konvergenz
+else lambda *= 0.5;                          // Reduccion del factor de amortiguacion
+if (R<=reduction*R0)                         // Comprobacion de la convergencia
 {
   converged = true;
   return;
@@ -855,27 +849,21 @@ if (R<=reduction*R0)                         // pruefe Konvergenz
 \end{lstlisting}}}
 
 
-\subsubsection{Die Klasse \lstinline{Banach}}
+\subsubsection{La clase \lstinline{Banach}}
 \begin{itemize}
-\item Löst ein nichtlineares System der Form $F(x)=0$ mittels
-  Fixpunktiteration $x = x - \sigma*F(x)$
-\item Die wichtigste Funktion ist die Funktion \lstinline{solve}, die
-  die eigentliche Lösung durchführt.
-\item Bei diesem Verfahren macht man sich den banachschen Fixpunktsatz
-  zunutze.
-\item Eine konkrete Implementierung, wie ein Problem mit der Klasse
-  \lstinline{Banach} gelöst wird ist nicht in dieser Dokumentation
-  enthalten, da dies sehr ahnlich zur Lösung mit der Klasse
-  \lstinline{Newton} funktioniert. Ein Beispiel sieht man in der Datei
-  \lstinline{wurzelbanach.cc}. Der einzige Unterschied besteht im
-  Verfahrensparameter sigma, den man bei Banach noch zusätzlich
-  beachten muss.
+\item Soluciona un sistema no lineal de la forma $F(x)=0$ usando el método de iteración del punto fijo $x = x - \sigma*F(x)$
+\item La función más importante es la función \lstinline{solve}, que permite obtener la solución real
+\item Éste método hace uso del teorema del punto fijo de Banach.
+\item Una implementación concreta, utiliza la clase \lstinline{Banach} 
+no está incluida en ésta documentación ya que es similar a la clase
+  \lstinline{Newton} que está funcionando. Se puede ver un ejemplo en el archivo
+  \lstinline{wurzelbanach.cc}. La única diferencia está en el parámetro sigma, que también se debe tener en cuenta con Banach.
 \end{itemize}
 
 
 
 
-\subsubsection{Implementierung}
+\subsubsection{Implementación}
 {\footnotesize{\begin{lstlisting}{}
 class Banach
 {
@@ -906,15 +894,13 @@ class Banach
 \end{lstlisting}}}
 
 \begin{itemize}
-\item Mit folgender Typdefinition spart man sich Schreibarbeit und es
-  ist klarer, dass damit eine Größe gemeint ist.
+\item Con Typedef ahorra papeleo y es más claro, en cuanto al tamaño.
 
   {\footnotesize{\begin{lstlisting}{}
 typedef std::size_t size_type;
 \end{lstlisting}}}
 
-\item Im Konstruktor werden allen privaten Parametern der Klasse Werte
-  zugewiesen,...
+\item En el constructor, los valores se asignan a todos los parámetros privados,...
 
 {\footnotesize{\begin{lstlisting}{}
 Banach::Banach ()
@@ -923,20 +909,16 @@ Banach::Banach ()
 {}
 \end{lstlisting}}}
 
-\item ...die man dann mit den folgenden Funktionen nachträglich noch
-  ändern kann. Der Parameter \glqq maxit\grqq{}  sorgt dafür, dass der
-  später noch erläuterte Solver in keine Endlosschleife gerät, falls
-  die Fixpunktiteration nicht konvergiert, sondern in diesem Fall
-  abbricht und meldet, dass keine Konvergenz vorliegt.
+\item ...que luego se pueden cambiar con las siguientes funciones.  El parámetro ''maxit''  asegura que el solucionador que se explica más adelante no quede en un bucle infinito en el caso de que no haya convergencia en la iteración del punto fijo, en cuyo caso aborta e informa que no hay convergencia.
 
-  {\footnotesize{\begin{lstlisting}{}
+ {\footnotesize{\begin{lstlisting}{}
 void Banach::set_maxit (size_type n)
 {
   maxit = n;
 }
 \end{lstlisting}}}
 
-\item Hier legt man den Verfahrensparameter $\sigma$ fest.
+\item Aquí se ajusta el parametro $\sigma$.
 
   {\footnotesize{\begin{lstlisting}{}
 void Banach::set_sigma (double sigma_)
@@ -945,8 +927,7 @@ void Banach::set_sigma (double sigma_)
 }
 \end{lstlisting}}}
 
-\item Wie viele Schritte soll der Solver machen, bevor er abbricht?
-  Die kann man hier festlegen.
+\item Cuántos pasos debe tomar el solucionador, antes de abortar?, se puede configurar aquí.
 
 {\footnotesize{\begin{lstlisting}{}
 void Banach::set_linesearchsteps (size_type n)
@@ -955,10 +936,7 @@ void Banach::set_linesearchsteps (size_type n)
 }
 \end{lstlisting}}}
 
-\item Ausgabekontrolle: Je höher die gesetzte Zahl ist, desto genauere
-  Informationen zur Konvergenz werden auf der Konsole ausgegeben. Was
-  die einzelnen Zahlen bedeuten sollte man sich allerdings bei Bedarf
-  im Quellcode ansehen.
+\item Control de salida: cuanto mayor sea el número establecido, más información se precisa sobre la convergencia en la consola. Lo que significan los números individuales, sin embargo, debe verse en el código fuente si es necesario.
 
   {\footnotesize{\begin{lstlisting}{}
 void Banach::set_verbosity (size_type n)
@@ -967,7 +945,7 @@ void Banach::set_verbosity (size_type n)
 }
 \end{lstlisting}}}
 
-\item Fehlertoleranz
+\item Tolerancia a fallos
   {\footnotesize{\begin{lstlisting}{}
 void Banach::set_abslimit (double l)
 {
@@ -975,7 +953,7 @@ void Banach::set_abslimit (double l)
 }
 \end{lstlisting}}}
 
-\item Reduktionsfaktor
+\item Factor de Reducción 
   {\footnotesize{\begin{lstlisting}{}
 void Banach::set_reduction (double l)
 {
@@ -983,8 +961,7 @@ void Banach::set_reduction (double l)
 }
 \end{lstlisting}}}
 
-\item Mit der Methode \lstinline{solve} kann dann ein gegebenes Model
-  unter Rückgriff auf die 'private Members' gelöst werden.
+\item Con el método \lstinline{solve} se puede resolver un modelo dado recurriendo a los miembros privados''.
 
   {\footnotesize{\begin{lstlisting}{}
 template<class M>
