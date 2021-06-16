@@ -1124,7 +1124,7 @@ void ModelProblem::f_x (const T& t, const hdnum::Vector<N>& x,
 }
 \end{lstlisting}}}
 
-\item Cualquier parámetro que pueda ser necesario se encuentra en la parte privada de la clase.
+\item Im privaten Teil der Klasse stehen eventuell benötigte Parameter.
 
 \end{itemize}
 
