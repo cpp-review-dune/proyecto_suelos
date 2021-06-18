@@ -1129,25 +1129,20 @@ void ModelProblem::f_x (const T& t, const hdnum::Vector<N>& x,
 \end{itemize}
 
 
-\subsection{Anwendungsbeispiel für \lstinline{modelproblem.hh}}
-Die Datei \lstinline{modelproblem_high_dim.hh} ist eine Umformulierung
-der Datei \lstinline{modelproblem.hh} und stellt die
-Differentialgleichung $u'(t) = \begin{pmatrix}
+\subsection{Ejemplo de aplicación \lstinline{modelproblem.hh}}
+El archivo \lstinline{modelproblem_high_dim.hh} es una reformulación
+del archivo \lstinline{modelproblem.hh} y pone la
+ecuación diferenial $u'(t) = \begin{pmatrix}
   5 & -2\\
   -2 & 5
-\end{pmatrix}*u(t)$ mit Anfangswert
-$ u(t) = \left( \begin{array}{c}1 \\\ 3 \end{array}\right)$ da. Damit
-ist sie ein Beispiel für die Darstellung einer mehrdimensionalen
-Differentialgleichung.
+\end{pmatrix}*u(t)$ con valor inicial
+$ u(t) = \left( \begin{array}{c}1 \\\ 3 \end{array}\right)$ allí. Esto lo convierte en un ejemplo de la representación de un Ecuación diferencial.
 
-\subsection{Der Solver löst die DGL - \lstinline{modelproblem.cc}}
+\subsection{El solucionador resuelve DGL - \lstinline{modelproblem.cc}}
 \begin{itemize}
-\item Diese Datei ist ein Musterbeispiel zum Lösen von gewöhnlichen
-  Differentialgleichungen.
-\item Sie zeigt, wie man Differentialgleichungsklasse und Solverklasse
-  so kombiniert, dass die Differentialgleichung gelöst und das
-  Ergebnis derart in eine Datei geschrieben wird, dass man es plotten
-  kann.
+\item Este archivo es un excelente ejemplo de resolución de problemas
+   Ecuaciones diferenciales.
+\item Muestra cómo combinar la clase de ecuación diferencial y la clase de solucionador de tal manera que la ecuación diferencial se resuelve y el resultado se escribe en un archivo de tal manera que se puede trazar.
 \end{itemize}
 
 {\footnotesize{\begin{lstlisting}{}
@@ -1158,53 +1153,45 @@ Differentialgleichung.
 #include "expliciteuler.hh"
 \end{lstlisting}}}
 
-Im Header wird neben Bibliotheken auch das Modelproblem, sowie eine
-Datei zur Lösung der Differentialgleichung eingebunden. In diesem Fall
-soll die Differentialgleichung mit dem expliziten Euler gelöst werden.
+Además de las bibliotecas, el encabezado también incluye el problema del modelo y un archivo para resolver la ecuación diferencial. En este caso, la ecuación diferencial debe resolverse con el Euler explícito.
 
 {\footnotesize{\begin{lstlisting}{}
 int main ()
 {
-  typedef double Number;                // Definiert Zahlentyp
-  typedef ModelProblem<Number> Model;   // Definiert Modeltyp
-  Model model(-1.0);                    // Objekt der Klasse mit lambda=-1
-  typedef ExplicitEuler<Model> Solver;  // Waehle einen Solver
-  Solver solver(model);                 // initialisiere Solver mit Model
-  solver.set_dt(0.02);                  // Setze Zeitabstaende
-  hdnum::Vector<Number> times;          // Vektor fuer Zeitabstaende
-  hdnum::Vector<hdnum::Vector<Number>> states; // Loesungsvektor
-  times.push_back(solver.get_time());   // Anfangszeit in Vektor speichern
-  states.push_back(solver.get_state()); // Anfangswert in Vektor speichern
-  while (solver.get_time()<5.0-1e-6)    // Schleife zum Loesen
+  typedef double Number;                // Define el tipo de numero
+  typedef ModelProblem<Number> Model;   // Define el tipo de modelo
+  Model model(-1.0);                    // Objeto de la clase con lambda =-1
+  typedef ExplicitEuler<Model> Solver;  // Elige el solucionador
+  Solver solver(model);                 // Inicializar el solucionar con el modelo
+  solver.set_dt(0.02);                  // Establecer intervalos de tiempo
+  hdnum::Vector<Number> times;          // Vector para intervalos de tiempo
+  hdnum::Vector<hdnum::Vector<Number>> states; // Vector solución
+  times.push_back(solver.get_time());   // Guarda la hora de inicio
+  states.push_back(solver.get_state()); // Fuarda el valor inicial en el vector
+  while (solver.get_time()<5.0-1e-6)    // Bucle para aflojar
     {
       solver.step();
-      times.push_back(solver.get_time());    // Zeit speichern
-      states.push_back(solver.get_state());  // Wert speichern
+      times.push_back(solver.get_time());    // Ahorrar tiempo
+      states.push_back(solver.get_state());  // Ahorra el valor
     }
 
-  gnuplot("mp2-ee-0.02.dat",times,states);   // Ausgabe wird im Abschnitt
-                                             // ueber Gnuplot erklaert
+  gnuplot("mp2-ee-0.02.dat",times,states);   // La salida esta en la seccion
+                                             // explicado sobre Gnuplot 
   return 0;
 }
 \end{lstlisting}}}
 
-Ein Alternativbeispiel ist die Datei
-\lstinline{modelproblem_high_dim.cc}. Indem man beim Solver EE durch
-andere Solver aus \lstinline{ode.hh} (Erklärung siehe unten) ersetzt,
-kann man die DGL mit verschiedenen Mitteln lösen und sieht dabei
-gleich ein Beispiel, dass eine DGL mit allen unseren Solvern
-kompatibel ist.
+Un ejemplo alternativo es el archivo 
+\lstinline{modelproblem_high_dim.cc}. Pasado por Solver EE otros solucionadores \lstinline{ode.hh} (Ver explicación a continuación) reemplazado,
+se puede resolver el DGL con diferentes medios y ver un ejemplo de que un DGL con todos nuestros solucionadores es compatible. 
 
-\subsection{Was muss ein Solver können? - \lstinline{expliciteuler.hh}}
+\subsection{Que debe poder hacer un solucionador? - \lstinline{expliciteuler.hh}}
 \begin{itemize}
-\item Diese Datei enthält die Klasse \lstinline{ExplicitEuler}.
-\item In der Klasse gibt es alle Methoden, die ein Solver in unserem
-  Kontext braucht.
-\item Alle Solver haben mindestens die Methoden, die
-  \lstinline{ExplicitEuler} hat, eventuell noch ein paar mehr.
-\item Mit Hilfe dieser Datei kann man alle Differentialgleichungen
-  lösen, die die bereits erwähnte Darstellung in einer Klasse
-  besitzen.
+\item Este archivo contiene la clase \lstinline{ExplicitEuler}.
+\item La clase contiene todos los métodos que necesita un solucionador en nuestro contexto.
+\item Todos los solucionadores tienen al menos los métodos que 
+  \lstinline{ExplicitEuler} tiene, tal vez algunos más.
+\item Con la ayuda de este archivo puede resolver todas las ecuaciones diferenciales que tienen la representación mencionada anteriormente en una clase.
 \end{itemize}
 
 {\footnotesize{\begin{lstlisting}{}
@@ -1234,19 +1221,9 @@ class ExplicitEuler
 \end{lstlisting}}}
 
 \begin{itemize}
-\item Zuerst noch eine kurze Bemerkung zu den Typedefs am Anfang: Der
-  Solver hat zuanächst im Konstruktor nur eine Referenz auf ein Model
-  bekommen. Damit ist aber noch nicht klar, mit welchen Zahlentypen im
-  Model gearbeitet wird und ob man die Funktionen davon aufrufen
-  kann. Um dies festzusetzen dienen die Typedefs. Somit kann der
-  Solver DGLs für beliebige Zahlentypen lösen und erst beim
-  Kompilieren wird festgelegt, welcher eigentlich gemeint ist.
+\item Primero, un breve comentario sobre las definiciones de tipo al principio: Inicialmente, el solucionador solo obtuvo una referencia a un modelo en el constructor. Sin embargo, todavía no está claro qué tipos de números se utilizan en el modelo y si se pueden llamar a sus funciones. Los typedefs se utilizan para determinar esto. Por lo tanto, el solucionador puede resolver DGL para cualquier tipo de número y solo cuando se compila se determina cuál se refiere realmente.
 
-\item Der Konstruktor speichert eine Referenz zu dem Model, das er
-  lösen soll. Außerdem werden hier Parameter für den
-  Lösungsalgorithmus wie die Größe der Zeitschritte, Anfangswerte,
-  oder ähnliches festgelegt.
-
+\item El constructor almacena una referencia al modelo que se supone que debe resolver. Además, aquí se especifican los parámetros para el algoritmo de solución, como el tamaño de los pasos de tiempo, los valores iniciales o similares.
 {\footnotesize{\begin{lstlisting}{}
 template<class M>
 ExplicitEuler::ExplicitEuler (const M& model_)
@@ -1257,10 +1234,7 @@ ExplicitEuler::ExplicitEuler (const M& model_)
 }
 \end{lstlisting}}}
 
-\item Da Solver die Lösung (Zeit-)Schritt für (Zeit-)Schritt
-  berechnen, kann man festlegen, wie groß diese Schritte sein
-  sollen. Je größer die Schritte, desto ungenauer das Ergebnis, aber
-  desto geringer der Rechenaufwand.
+\item Dado que Solver calcula la solución (tiempo) paso a (tiempo) paso, puede determinar qué tan grandes deben ser estos pasos. Cuanto mayores sean los pasos, menos preciso será el resultado, pero menor será el esfuerzo computacional.
 
 {\footnotesize{\begin{lstlisting}{}
 template<class M>
@@ -1270,9 +1244,7 @@ void ExplicitEuler::set_dt (time_type dt_)
 }
 \end{lstlisting}}}
 
-\item Der eigentliche Lösungsalgorithmus steht in der Funktion
-  step. Sie entscheidet, wie man vom einem zum nächsten Schritt
-  gelangt. Hier steht also der Algorithmus des expliziten Eulers.
+\item El algoritmo de solución real está en la función de paso. Decide cómo pasar de un paso al siguiente. Así que aquí está el algoritmo del Euler explícito.
 
 {\footnotesize{\begin{lstlisting}{}
 template<class M>
@@ -1284,7 +1256,7 @@ void ExplicitEuler::step ()
 }
 \end{lstlisting}}}
 
-\item Der bisher errechnete Lösungsvektor:
+\item El vector solución calculado hasta ahora:
 {\footnotesize{\begin{lstlisting}{}
 template<class M>
 const hdnum::Vector<number_type>& ExplicitEuler::get_state () const
@@ -1292,7 +1264,7 @@ const hdnum::Vector<number_type>& ExplicitEuler::get_state () const
   return u;
 }
 \end{lstlisting}}}
-\item Der Zeitpunkt, der gerade berechnet wurde:
+\item El tiempo que se acaba de calcular:
 {\footnotesize{\begin{lstlisting}{}
 template<class M>
 time_type ExplicitEuler::get_time () const
@@ -1301,7 +1273,7 @@ time_type ExplicitEuler::get_time () const
 }
 \end{lstlisting}}}
 
-\item Das aktuelle dt (Schrittweite):
+\item Actualiza dt (tamaño del paso):
 {\footnotesize{\begin{lstlisting}{}
 template<class M>
 time_type ExplicitEuler::get_dt () const
@@ -1311,14 +1283,8 @@ time_type ExplicitEuler::get_dt () const
 \end{lstlisting}}}
 \end{itemize}
 
-\subsection{Einschub: Gnuplot in \lstinline{ode.hh}}
-Ein numerischer Solver kann uns natürlich keine analytische Lösung
-einer DGL in Form einer konkreten Funktion liefern. Er kann uns aber
-sagen, wie die Lösungsfunktion an ganz vielen Punkten aussieht. Damit
-wir mit diesen vielen Zahltupeln etwas anfangen können, visualisieren
-wir sie mit Gnuplot.  Folgende Template-Funktionen machen uns dies
-sehr leicht und schreiben das Ergebnis im richtigen Format in eine
-Datei, sodass wir es dann direkt plotten können.
+\subsection{Insertar Gnuplot en \lstinline{ode.hh}}
+Por supuesto, un solucionador numérico no puede proporcionarnos una solución analítica de una ecuación diferencial en forma de función concreta. Pero puede decirnos cómo se ve la función de solución en muchos puntos. Para que podamos hacer algo con estas muchas tuplas numéricas, las visualizamos con Gnuplot. Las siguientes funciones de plantilla nos facilitan esto y escriben el resultado en el formato correcto en un archivo para que luego podamos trazarlo directamente.
 
 \begin{enumerate}
 \item
@@ -1327,77 +1293,56 @@ void gnuplot (const std::string& fname, const std::vector<T> t,
  const std::vector<Vector<N> > u)
 \end{lstlisting}}}
 
-Nur für eindimensionale DGL geeignet!  Man übergibt der Funktion einen
-Dateinamen (.dat) in Anführungsstrichen, sowie Zeit und
-Lösungsvektor. Die Funktion sorgt dafür, dass die Daten in einer Art
-Tabelle in einer Datei mit dem gewünschten Namen stehen. Diese Datei
-kann man dann plotten.
+¡Solo apto para DGL unidimensional! La función recibe un nombre de archivo (.dat) entre comillas, así como la hora y el vector de solución. La función asegura que los datos estén en una especie de tabla en un archivo con el nombre deseado. A continuación, este archivo se puede trazar.
 \item
 {\footnotesize{\begin{lstlisting}{}
 void gnuplot (const std::string& fname, const std::vector<T> t,
  const std::vector<Vector<N> > u, const std::vector<T> dt)
 \end{lstlisting}}}
 
-Für zweidimensionale DGL geeignet!  Man übergibt der Funktion die
-gleichen Daten wie oben und zusätzlich noch den zweiten
-Lösungsvektor. Das Ergebnis ist ebenfalls analog. Man beachte beim
-plotten dann allerdings die Eigenheiten der Mehrdimensionalität.
+¡Adecuado para DGL bidimensional! Pasas los mismos datos a la función que arriba más el segundo vector de solución. El resultado también es análogo. Sin embargo, al trazar, debe tener en cuenta las peculiaridades de la multidimensionalidad.
 \end{enumerate}
 
-Als Beispielvorlage kann der Code im vorhergehenden Abschnitt am Ende
-gesehen werden.
+Como plantilla de ejemplo, el código de la sección anterior se puede ver al final.
 
-Die wichtigsten Gnuplotbefehle im Terminal:
+Los comandos de Gnuplot más importantes en la terminal:
 \begin{enumerate}
-\item \lstinline{gnuplot} - öffnet Gnuplot
-\item \lstinline{plot 'dateiname.dat' using 1:2} - plottet im zweidimensionalen unter Verwendung der Zeilen eins und zwei
-\item \lstinline{plot 'dateiname.dat' using 1:2, 'dateiname.dat' using 1:3} - plottet im zweidimensionalen zwei Graphen
-\item \lstinline{splot 'dateiname.dat' using 1:2:3} - plottet im dreidimensionalen
-\item \lstinline{exit} - beendet gnuplot
+\item \lstinline{gnuplot} - abre Gnuplot
+\item \lstinline{plot 'dateiname.dat' using 1:2} - grafica en dos dimensiones usando las columnas 1 vs 2 
+\item \lstinline{plot 'dateiname.dat' using 1:2, 'dateiname.dat' using 1:3} - traza gráficas 1 vs 2, y 1 vs 3.
+\item \lstinline{splot 'dateiname.dat' using 1:2:3} - Grafica en tres dimensiones
+\item \lstinline{exit} - termina Gnuplot
 \end{enumerate}
 
 
-\subsection{Einschrittverfahren - \lstinline{ode.hh}}
+\subsection{Proceso de un paso- \lstinline{ode.hh}}
 
-Nachdem wir uns jetzt angeschaut haben, wie genau eine
-Differentialgleichung und ein Solver in eine Klasse verpackt werden
-müssen, damit sie untereinander kompatibel sind und wie man mit dem
-Solver dann die Differentialgleichung löst, können wir dazu übergehen
-uns mehrere solcher Solver anzuschauen. In der Vorlesung lernt man
-dazu die impliziten und expliziten Runge-Kutta Verfahren als
-wichtigste Beispiele kennen. Der explizite Euler den wir zuvor schon
-als Beispiel hatten gehört auch dazu. In der Datei \lstinline{ode.hh}
-sind mehrerer solche Solver implementiert. Damit man eine beliebige
-Differentialgleichung (natürlich wieder in einer Klasse verpackt) mit
-jedem Solver lösen kann, haben diese Solverklassen alle Methoden mit
-den jeweils gleichen Funktionsköpfen. Lediglich in der Art wie diese
-Funktionen dann implementiert sind unterscheiden sie sich, was dann
-das einzelne Verfahren ausmacht.  Zusätzlich zu den Methoden der zuvor
-behandelten Klasse \lstinline{ExplicitEuler} haben die Klassen in
-\lstinline{ode.hh} noch einige zusätzliche Funktionen. Die Verfahren
-mit Schrittweitensteuerung sind ebenfalls leicht abgewandelt.
+Ahora que hemos visto cómo se empaquetan exactamente una ecuación diferencial y un solucionador en una clase
+para que sean compatibles entre sí y cómo luego se resuelve la ecuación diferencial con el solucionador, podemos pasar a ver varios de estos solucionadores. En la conferencia conocerás los métodos implícitos y explícitos de Runge-Kutta como los ejemplos más importantes. El Euler explícito, que teníamos antes como ejemplo, también es parte de él. En el archivo \lstinline{ode.hh}
+se implementan varios de estos solucionadores. Para que pueda resolver cualquier ecuación diferencial (nuevamente empaquetada en una clase, por supuesto) con cada solucionador, todas estas clases de solucionador tienen métodos con los mismos cabezales de función. Solo en la forma en que se implementan estas funciones difieren, lo que luego define el procedimiento individual. Además de los métodos de la clase discutidos anteriormente \lstinline{ExplicitEuler} tener las clases en
+\lstinline{ode.hh} algunas funciones adicionales. Los métodos con control de tamaño de paso también se modifican ligeramente.
 
 
-\subsubsection{Die Verfahren in ode.hh}
+\subsubsection{Los procedimientos en ode.hh}
 \begin{itemize}
-\item Explizite Runge-Kutta Verfahren
+\item Método explícito de Runge-Kutta 
   \begin{itemize}
-  \item\lstinline{EE} - expliziter Euler
+  \item\lstinline{EE} - Método explícito de Euler
   \item\lstinline{ModifiedEuler}
   \item\lstinline{Heun2}
   \item\lstinline{Heun3}
   \item\lstinline{Kutta3}
   \item\lstinline{RungeKutta4}
   \end{itemize}
-\item Implizite Runge-Kutta Verfahren
+\item Método implícito de Runge-Kutta 
   \begin{itemize}
-  \item \lstinline{IE} - impliziter Euler
-  \item \lstinline{DIRK} - Diagonal implizites Verfahren
+  \item \lstinline{IE} - Método implícito de Euler
+  \item \lstinline{DIRK} -Procedimiento implícito diagonal
   \end{itemize}
-\item Schrittweitensteuerung
+\item Control de tamaño del paso
   \begin{itemize}
   \item\lstinline{RKF45}
-  \item\lstinline{RE} - Richardsonextrapolation
+  \item\lstinline{RE} - Extrapolación de Richardson
   \end{itemize}
 \end{itemize}
 
