@@ -1,4 +1,4 @@
-include ../../make.def
+include ../../../make.def
 HDNUMPATH  = ../..
 
 # rule to build all programs without GMP support. That is the default
