@@ -5,7 +5,7 @@ struct point{
 };
 
 int main (){
-    std::cout<<"Bienvenido al programa de Estructura./n"<<std::endl;
+    std::cout<<"Bienvenido al programa de Estructuras./n"<<std::endl;
    point blank; 
     blank.x= 3.0;
     blank.y= 4.0;
