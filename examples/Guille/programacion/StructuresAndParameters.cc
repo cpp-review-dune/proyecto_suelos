@@ -21,7 +21,7 @@ int main (){
     Point p1 = { 3.0, 4.0 };
     Point p2 = p1;
 
-    double distance(Point blank);
+    double distance(blank);
     
 
 
