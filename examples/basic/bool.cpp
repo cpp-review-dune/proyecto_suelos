@@ -1,5 +1,5 @@
 #include<iostream>
-
+#include<stdio.h>
 int main(){
 int x;
 //prompt the user for input;
@@ -16,5 +16,9 @@ std::cin>>x;
 
 // print the value we got from the user
   std::cout << x << std::endl;
+  std::string name;
+  std::cout << "What is your name? \n";
+  std::cin >> name;
+  std::cout << name << std::endl;
   return 0;
 }
