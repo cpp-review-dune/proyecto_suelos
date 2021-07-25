@@ -17,7 +17,5 @@ int main(){
     std::cout<<"la suma de los elementos de nuestro vector es:"<<suma<<std::endl;
 
 
-
-
     return 0;
 }

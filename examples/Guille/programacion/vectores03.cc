@@ -5,7 +5,7 @@
 
 int main(){
 
-    int numeros [100],i,n,mayor;
+    int numeros [100],i,n,mayor=0;
 
     std::cout<<"Digite el numero de elementos del vector:";
     std::cin>>n;
