@@ -19,6 +19,8 @@ int main(){
         }
     }
 
+
+    
     if(filas == columnas){
         for(int i=0; i<filas; i++){
             for(int j; j<columnas; j++){
