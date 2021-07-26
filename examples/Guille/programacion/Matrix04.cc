@@ -5,7 +5,7 @@
 int main(){
 
     int matriz1[100][100], filas, columnas;
-    char bandera = 'F';
+    char band = 'f'; 
 
     std::cout<<"Digite el numero de filas: "; 
     std::cin>>filas;
@@ -23,20 +23,21 @@ int main(){
         for(int i=0; i<filas; i++){
             for(int j; j<columnas; j++){
                 if(matriz1[i][j] == matriz1[j][i]){
-                    bandera = 'V';
+                    band= 'v';
                 }
             }
         }
     }
 
-    if(bandera == 'V'){
-
+    if(band == 'v'){
         std::cout<<"La matriz es simetrica"<<std::endl;
-    }
+
+    }   
 
     else{
         std::cout<<"La matriz no es simetrica"<<std::endl;
     }
-
+    
+    
     return 0;
 }
