@@ -19,7 +19,7 @@ int main(){
             std::cout<<"Digite el valor que va en la fila "<<i + 1<<" y la columna "<<j + 1<<std::endl;
             std::cin>>matriz[i][j];
         }
-
+        
     }
 
     std::cout<<"\n";

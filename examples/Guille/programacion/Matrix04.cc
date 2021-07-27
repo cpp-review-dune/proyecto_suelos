@@ -13,7 +13,7 @@ int main(){
     std::cin>>columnas;
 
     for(int i=0; i<filas; i++){
-        for(int j; j<columnas; j++){
+        for(int j=0; j<columnas; j++){
             std::cout<<"Digite el valor que va a ir en la fila "<<i<<" y la columna "<<j<<":  ";
             std::cin>>matriz1[i][j];
         }
@@ -23,14 +23,15 @@ int main(){
     
     if(filas == columnas){
         for(int i=0; i<filas; i++){
-            for(int j; j<columnas; j++){
-                if(matriz1[i][j] == matriz1[j][i]){
+            for(int j=0; j<columnas; j++){
+                if(matriz1[i][j] == matriz1[j][i] & i!=j){
                     band= 'v';
                 }
             }
         }
     }
 
+    
     if(band == 'v'){
         std::cout<<"La matriz es simetrica"<<std::endl;
 
