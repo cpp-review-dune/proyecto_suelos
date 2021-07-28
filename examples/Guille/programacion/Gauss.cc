@@ -15,7 +15,7 @@ int main(){
         for(int j=0; j<3; j++){
             //3/3 Matriz[0][0]=3 
             matriz2[i][j]= matriz2[i][j] / matriz[0][0];
-            std::cout<<std::fixed<<matriz2[i][j]<<std::endl;
+            
         }
        
     }
@@ -23,13 +23,13 @@ int main(){
     
     for(int j=0; j<3; j++){
         matriz2[i+1][j] = matriz2[i+1][j] - (matriz2[i][j]*matriz[1][0]);
-        std::cout<<std::fixed<<matriz2[i+1][j]<<std::endl;
+        
     }
 
     
     for(int j=0; j<3; j++){
         matriz2[i+2][j] = matriz2[i+2][j] - (matriz2[i][j]*matriz[2][0]);
-        std::cout<<std::fixed<<matriz2[i+2][j]<<std::endl;
+        
     }
 
     for(int i=0; i<3; i++){
@@ -46,14 +46,14 @@ int main(){
         for(int j=0; j<3; j++){
             //3/3 Matriz[0][0]=3 
             matriz2[i][j]= matriz2[i][j] / matriz[1][1];
-            std::cout<<std::fixed<<matriz2[i][j]<<std::endl;
+            
         }
        
     }
 
     for(int j=0; j<3; j++){
         matriz2[i+2][j] = matriz2[i+2][j] - (matriz2[i+1][j]*matriz[2][1]);
-        std::cout<<std::fixed<<matriz2[i+2][j]<<std::endl;
+        
     }
 
     for(int i=0; i<3; i++){
@@ -70,7 +70,7 @@ int main(){
         for(int j=0; j<3; j++){
             //3/3 Matriz[0][0]=3 
             matriz2[i][j]= matriz2[i][j] / matriz[2][2];
-            std::cout<<std::fixed<<matriz2[i][j]<<std::endl;
+            
         }
        
     }
