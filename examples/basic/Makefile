@@ -1,7 +1,7 @@
 include ../../make.def
 HDNUMPATH  = ../..
 
-primero: holamundo.cc
+vectores01: vectores01.cc
 	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
 
 # rule to build all programs without GMP support. That is the default
