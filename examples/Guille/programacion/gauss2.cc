@@ -28,7 +28,7 @@ int main(){
         i = 1; j= 1;
         double a= matriz[i][j-1];
         for(j = 0;j<n;j++){
-            matriz2[i][j]=matriz2[i][j]-a*matriz2[i-1][j];
+            matriz2[i][j]-=a*matriz2[i-1][j];
         }
     //}
     std::cout<< "Matriz modificada "<<std::endl;

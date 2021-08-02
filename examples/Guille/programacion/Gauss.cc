@@ -5,8 +5,10 @@ int main(){
 
     int i=0;
     std::cout.precision(3);
-    double matriz[3][3] = {{3,7,4},{9,5,2},{6,2,1}};
-    double matriz2[3][3] = {{3.0,7.0,4.0},{9.0,5.0,2.0},{6.0,2.0,1.0}};
+    int m = 3;
+    int n = 3;
+    double matriz[m][n] = {{3,7,4},{9,5,2},{6,2,1}};
+    double matriz2[m][n] = {{3.0,7.0,4.0},{9.0,5.0,2.0},{6.0,2.0,1.0}};
 
     
     if(matriz2[0][0] != 0){
