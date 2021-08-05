@@ -6,30 +6,35 @@ double promX(double *x,int n);
 
 int main()
 {
+
+
 double *x, prom;
 FILE *archDat, *archRes;
 int n, i;
-archDat = fopen("ldatos1.txt", "r");
+archDat = fopen("ldatos1", "r");
 if( archDat == NULL ){
+
 printf("\n\n Archivo inexistente.\n\n");
-exit (1) ;
-}
-fscanf(archDat,"%d",&n);
+exit (1) ;}
+
+fscanf (archDat, "%d", &n);
 x = new double[n];
 if ( x == NULL ){
 printf("\n\n Memoria insuficiente.\n\n");
 exit(1);
 }
 for( i=0; i<n; i++) {
-    fscanf(archDat,"%lf",&x[i]);
+    fscanf(archDat, "%lf", &x[i]);
     }
 fclose (archDat);
 archRes = fopen("ejemplo.res", "w");
-prom = promX(x,n);
-fprintf (archRes, "El promedio es: %12.4lf\n ", prom);
+prom = promX(x, n);
+printf("Promedio %12.4lf\n",prom);
+fprintf (archRes, " promedio %12.4lf\n ", prom);
 fclose(archRes);
 return 0;
 }
+
 double promX(double *x,int n){
     int i;
     double suma = 0.0;
