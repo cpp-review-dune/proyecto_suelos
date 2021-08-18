@@ -8,7 +8,7 @@ int main(){
 
     //copiando los elementos del arreglo letras 1 a letras 3
 
-    for(int i; i<5; i++){
+    for(int i= 0; i<5; i++){
 
         letras3[i] = letras1[i];
     }

@@ -7,7 +7,7 @@ y luego copiar todo su contenido hacia otra matriz
 
 int main(){
 
-    int matriz1[2][2] = {1,2,3,4}; 
+    int matriz1[2][2] = {{1,2},{3,4}}; 
     int matriz2[2][2];
 
     //pasando el contenido de numeros hacia matriz2
