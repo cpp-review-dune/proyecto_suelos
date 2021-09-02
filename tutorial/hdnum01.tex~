@@ -84,7 +84,7 @@ Los objetivos en el desarrollo de HDNUM fueron i) la facilidad de uso (incluida 
 \item Solución de la ecuación de Poisson utilizando diferencias finitas
 \end{enumerate}
 
-\subsection{Instalación}
+\subsection{Instalación de HDNUM 2}
 
 HDNUM es una biblioteca de ''solo encabezado'' y no requiere ninguna instalación más que descargar los archivos. La versión actual se puede encontrar usando el siguiente comando para descargarla:
 
@@ -1250,9 +1250,9 @@ void ExplicitEuler::set_dt (time_type dt_)
 template<class M>
 void ExplicitEuler::step ()
 {
-  model.f(t,u,f);   // berechnet Wert von f an der Stelle t
-  u.update(dt,f);   // naechster Funktionswert ist alter Wert+dt*f(t)
-  t += dt;          // die Zeit wird um dt nach vorne gesetzt
+  model.f(t,u,f);   // Calcular el valor de f en el punto t
+  u.update(dt,f);   // El siguiente valor de la funcion se altera valor+dt*f(t)
+  t += dt;          // El tiempo aumenta un valor dt 
 }
 \end{lstlisting}}}
 
@@ -1323,211 +1323,191 @@ se implementan varios de estos solucionadores. Para que pueda resolver cualquier
 \lstinline{ode.hh} algunas funciones adicionales. Los métodos con control de tamaño de paso también se modifican ligeramente.
 
 
-\subsubsection{Die Verfahren in ode.hh}
+\subsubsection{Los procedimientos en ode.hh}
 \begin{itemize}
-\item Explizite Runge-Kutta Verfahren
+\item Método explícito de Runge-Kutta 
   \begin{itemize}
-  \item\lstinline{EE} - expliziter Euler
+  \item\lstinline{EE} - Método explícito de Euler
   \item\lstinline{ModifiedEuler}
   \item\lstinline{Heun2}
   \item\lstinline{Heun3}
   \item\lstinline{Kutta3}
   \item\lstinline{RungeKutta4}
   \end{itemize}
-\item Implizite Runge-Kutta Verfahren
+\item Método implícito de Runge-Kutta 
   \begin{itemize}
-  \item \lstinline{IE} - impliziter Euler
-  \item \lstinline{DIRK} - Diagonal implizites Verfahren
+  \item \lstinline{IE} - Método implícito de Euler
+  \item \lstinline{DIRK} -Procedimiento implícito diagonal
   \end{itemize}
-\item Schrittweitensteuerung
+\item Control de tamaño del paso
   \begin{itemize}
   \item\lstinline{RKF45}
-  \item\lstinline{RE} - Richardsonextrapolation
+  \item\lstinline{RE} - Extrapolación de Richardson
   \end{itemize}
 \end{itemize}
 
-\subsection{Das allgemeine Runge-Kutta-Verfahren - \lstinline{RungeKutta}}
-Diese Klasse ist dazu gebaut, um eine Differentialgleichung mit einem
-beliebigen expliziten oder impliziten Runge-Kutta-Verfahren zu
-Lösen. Die Differentialgleichung muss dabei auf die gleiche Weise wie
-bisher in einer Klasse implementiert sein.
+\subsection{Método de Runge-Kutta-Verfahren - \lstinline{RungeKutta}}
+Ésta clase está construida para resolver una ecuación diferencial con un método 
+de RungeKutta explícito o implícito. Se debe implementar de la misma forma como 
+se realizó anteriormente.  
 
-\subsubsection{Bedienung der Klasse \lstinline{RungeKutta}}
-Der einzige Unterschied zur Handhabung einer anderen Solverklasse
-besteht darin, dass dem Konstruktor zusätzlich noch das
-Butcher-Tableau des gewünschten Verfahrens übergeben werden muss. Der
-Funktionskopf im Namespace hdnum sieht folgendermaßen aus:
+\subsubsection{Funcionamiento de la clase \lstinline{RungeKutta}}
+La única diferencia con el manejo de otra clase de solucionador es que 
+al constructor de la clase, se le debe pasar la tabla del método deseado.
+
+La cabecera de funciones en el Namespace de hdnum tiene el siguiente aspecto: 
+
 {\footnotesize{\begin{lstlisting}{} RungeKutta::RungeKutta (const
       M& model, DenseMatrix<number_type> A_, Vector<number_type> b_,
       Vector<number_type> c_)
 \end{lstlisting}}}
 
-Die Matrix \lstinline{A_} und die Vektoren \lstinline{b_} und
-\lstinline{c_} kommen direkt aus dem Butcher Tableau. Alles Weitere
-ist dann analog zu den anderen Solverklassen. N ist ein
-Templateparameter der Klasse. Möchte man statt dem Newtonverfahren das
-Banachverfahren zur Lösung von nichtlinearen Gleichungssystemen
-verwenden, so ist Banach ein zweiter Templateparameter den man beim
-Erzeugen eines Objektes davor schreibt. In diesem Fall macht es auch
-Sinn dem Konstruktor als weiteres Argument am Schluss noch einen
-$number\_type \ sigma\_$ zu übergeben. Der entsprechende Konstruktor
-ist implementiert.  Das könnte dann folgendermaßen aussehen:
+La matriz \lstinline{A_} y los vectores \lstinline{b_} y
+\lstinline{c_} provienen directamente de cuadro de Butcher. Todo lo demás es entonces 
+análogo a las otras clases de solucionadores. N es un parámetro de la plantilla de clase. 
+Si desea utilizar el método de Banach en lugar del método de Newton para resolver sistemas 
+de ecuaciones no lineales, Banach es un segundo parámetro de plantilla que escribe 
+delante de él al crear un objeto. En este caso, también tiene sentido agregar otro 
+argumento al constructor al final $number\_type \ sigma\_$ a entregar. Se implementa 
+el constructor correspondiente. Entonces podría verse así:
 {\footnotesize{\begin{lstlisting}{} RungeKutta<Model, Banach>
       Solver(model, A, b, c, 0.5)
 \end{lstlisting}}}
 
-Dabei müsste dann model ein Modelproblem vom Typ Model sein und $A$ eine
-$n \times n$ Matrix, sowie $b$ und $c$ $n$-dimensionale Vektoren. Das
-Sigma im Banachverfahren wäre in diesem Fall dann 0,5.
+El modelo entonces tendría que ser un problema de modelo del tipo Modelo y $A$ una matriz 
+$n \times n$, también $b$ y $c$ vectores $n$-dimensionales. El sigma en el 
+método de Banach sería 0,5 en este caso.
 
 
-\paragraph{Die Algorithmen hinter Funktion \lstinline{void step}}
+\paragraph{Los algoritmos detrás de la función \lstinline{void step}}
 \begin{itemize}
-\item Die Funktion \lstinline{step} unterscheidet von Anfang an, ob es
-  sich um ein explizites oder implizites Verfahren handelt. (Die
-  Testfunktion erkennt dies am Butchertableau).
-\item Im expliziten Fall sind alle Werte bekannt und in privaten
-  Variablen gespeichert, um
-  $u_{n}^h = u_{n-1}^h +h_n(b_1k_1+...+b_sk_s)$ mittels
+\item La función \lstinline{step} diferencia desde el principio si se trata de un 
+procedimiento explícito o implícito. (La función de prueba reconoce esto en el panel Butcher).
+\item En el caso explícito, todos los valores son conocidos y privados.
+   Variables guardadas en
+  $u_{n}^h = u_{n-1}^h +h_n(b_1k_1+...+b_sk_s)$ por medio de
   $k_1 = f(t_{n-1},u_{n-1}^h)$,
   $k_i = f(t_{n-1}+c_ih_n, u_{n-1}^h+h_n \sum_{j=1}^{i-1}a_{ij}k_j)$
-  zu berechnen. Dabei wird die Funktion $f$ von der Problemklasse
-  bereitgestellt
+  calcular. La función $ f $ se convierte en una clase de problema previsto
+\item En el caso implícito se aplica $k_i = f(t_{n-1}+c_ih_n,
+  u_{n-i}^h+h_n \sum_{j=1}^s a_{ij}k_j)$ por $i = 1,...,s$ para resolver y con eso 
+ $u_n^h = u_{n-1}^h + h_n \sum_{i = 1}^s b_ik_i $ para determinar. 
+ Numéricamente, sin embargo es más fácil comenzar con $z_i := h_n
+  \sum_{j=1}^s a_{ij}k_j$ por $i = 1,...,s$ para calcular y luego el
+  $k_i$ encima $K= h_n^{-1}A^{-1}Z$ para determinar. Donde $K$ y $Z$
+  vectores de vectores.
 
-\item Im impliziten Fall gilt es $k_i = f(t_{n-1}+c_ih_n,
-  u_{n-i}^h+h_n \sum_{j=1}^s a_{ij}k_j)$ für $i = 1,...,s$ zu lösen
-  und damit $u_n^h = u_{n-1}^h + h_n \sum_{i = 1}^s b_ik_i $ zu
-  bestimmen. Numerisch ist es jedoch einfacher, zunächst $z_i := h_n
-  \sum_{j=1}^s a_{ij}k_j$ für $i = 1,...,s$ zu berechnen und dann die
-  $k_i$ über $K= h_n^{-1}A^{-1}Z$ zu bestimmen. Dabei sind $K$ und $Z$
-  Vektoren aus Vektoren.
+  Si $b^T$ es igual a la última línea de $A$, uno puede mirar el cálculo de 
+  la $k_i$ guardar, actualizar y calcular $u_n^h = u_{n-1}+z_s$. 
+  Los sistemas de ecuaciones no lineales para el cálculo de $ z_i $ 
+  se resuelven opcionalmente con el método de Banach o Newton, para lo cual se crea una clase de problema.
 
-  Falls $b^T$ gleich der letzten Zeile von $A$ ist, kann man sich die
-  Berechnung der $k_i$ sparen und direkt $u_n^h = u_{n-1}+z_s$
-  berechnen. Die nichtlinearen Gleichungssysteme bei der Berechnung
-  der $z_i$ werden wahlweise mit dem Banach- oder Newtonverfahren
-  gelöst, für die eine Problemklasse erstellt wird.
+\item Tanto para el método de Banach como para el de Newton, se requiere una clase de 
+  problema específica que modele el problema a resolver. En nuestro caso, esto se hace mediante la clase  \lstinline{ImplicitRungeKuttaStepProblem}. Esto se inicializa en el constructor con todas las variables 
+importantes de la clase \lstinline{RungeKutta}. Sin embargo, es importante saber que los métodos de Banach y Newton 
+no pueden calcular ceros de funciones que tienen vectores de vectores como argumentos. Por lo tanto, hay que entender $Z$ como un vector de tamaño $n * s$ y solo entonces de nuevo a $s$ vectores
+calcular de nuevo el tamaño $n$.
 
-\item Sowohl für das Banach- als auch für das Newtonverfahren benötigt
-  man eine bestimmte Problemklasse, die das zu lösende Problem
-  modelliert. In unserem Fall erfüllt diesen Zweck die Klasse
-  \lstinline{ImplicitRungeKuttaStepProblem}. Diese wird im Konstruktor
-  mit allen wichtigen Größen der Klasse \lstinline{RungeKutta}
-  initialisiert. Wichtig zu wissen ist jedoch, dass Banach- und
-  Newtonverfahren keine Nullstellen von Funktionen, die Vektoren von
-  Vektoren als Argument haben, berechnen können. Deshalb muss man $Z$
-  als einen Vektor der Größe $n*s$ auffassen und erst danach wieder
-  auf $s$ Vektoren der Größe $n$ zurückrechnen.
+\item El corazón de la clase
+  \lstinline{ImplicitRungeKuttaStepProblem} son las funciones
+  \lstinline{void F} y \lstinline{void F_x}. In der ersten wird die
+  En el primero, se modela la función, que se cancela cuando se encuentran los $ z_i $ correctos, 
+  mientras que la segunda función solo se requiere en el método de Newton y proporciona la matriz 
+  jacobiana de la primera función.
 
-\item Das Herzstück der Klasse
-  \lstinline{ImplicitRungeKuttaStepProblem} sind die Funktionen
-  \lstinline{void F} und \lstinline{void F_x}. In der ersten wird die
-  Funktion modelliert, die annuliert wird, wenn die richtigen $z_i$
-  getroffen sind, während die zweite Funktion nur im Newtonverfahren
-  benötigt wird und die Jacobimatrix der ersten Funktion bereitstellt.
-
-\item Die Funktion \lstinline{F} sieht dabei folgendermaßen aus:
+\item La función \lstinline{F} se ve como esto:
   \begin{align*}
     F: \mathbb{R}^{n*s} \to \mathbb{R}^{n*s}, \left( \begin{array}{c}z_1 \\...\\...\\z_s\end{array} \right) \mapsto \left( \begin{array}{c}F_1(z_1,...,z_s)\\...\\...\\F_s(z_1,...,z_s)\end{array} \right)
   \end{align*}
-  wobei $F_i(z_1,...,z_s) = z_i-h_n \sum_{j=1}^s
-  a_{ij}f(t_{n-1}+c_jh_n, u_{n-1}+z_j)$ für $i = 1,...,s$.
+  por lo cual $F_i(z_1,...,z_s) = z_i-h_n \sum_{j=1}^s
+  a_{ij}f(t_{n-1}+c_jh_n, u_{n-1}+z_j)$ por $i = 1,...,s$.
 
-\item Die zu berechnende Jacobimatrix ist eine Blockmatrix aus
-  $s\times s$ Blöcken der Größe $n \times n$. Dabei gilt für den
-  $(i,j)$-ten Block:
+\item La matriz jacobiana a calcular es una matriz de bloques
+  $s\times s$ Bloques de tamaño $n \times n$. Lo siguiente se aplica al bloque $ (i, j) $ th:
   \begin{align}
     J_{ij} &= \frac{\partial F_i}{\partial z_j}(z_1,...,z_s) = \frac{\partial}{\partial z_j}(z_i - h_n \sum_{k=1}^s a_{ik}f(t_{n-1}+c_kh_n, u_{n-1}+z_k)) \\
            &= \delta_{ij}I-h_n \sum_{k=1}^s a_{ik} \frac{\partial}{\partial z_j}f(t_{n-1}+c_kh_n, u_{n-1}+z_k)\\
            &= \delta_{ij}I-h_n a_{ij} \frac{\partial f}{\partial z_j}(t_{n-1}+c_jh_n, u_{n-1}+z_j)
   \end{align}
-  $ \frac{\partial f}{\partial z_j}$ erhalten wir dabei aus der
-  Funktion \lstinline{f_x} der Differentialgleichungsklasse.
+  $ \frac{\partial f}{\partial z_j}$ obtenemos de la función \lstinline{f_x} la clase de ecuación diferencial.
 \end{itemize}
 
-\subsubsection{Konsistenzordnungstests mit \lstinline{void ordertest}}
+\subsubsection{Pruebas de orden de coherencia con \lstinline{void ordertest}}
 
-Mit dieser Funktion kann man die Konsistenzordnung eines allgemeinen
-Runge-Kutta-Verfahrens, dessen Butchertableau man kennt,
-bestimmen. Dazu ist es jedoch nötig, in der Klasse der
-Differentialgleichung die exakte Lösung in der eine Funktion u
-anzugeben.  Ein Beispiel dazu findet man in der Datei
-\lstinline{modelproblem.hh}.  Der Funktionskopf von
-\lstinline{ordertest} sieht folgendermaßen aus:
+Esta función se puede utilizar para determinar el orden de consistencia de un método general 
+de Runge-Kutta, cuya tabla Butcher se conoce. Para esto, sin embargo, es necesario encontrar 
+la solución exacta en la función $u$ en la clase de la ecuación diferencial
+para especificar. Se puede encontrar un ejemplo en el archivo
+\lstinline{modelproblem.hh}.  La cabecera funcional de
+\lstinline{ordertest} se ve como esto:
 {\footnotesize{\begin{lstlisting}{} typedef double Number;
       template<class M, class S> void ordertest(const M&
       model, S solver, Number T, Number h_0, int L)
     \end{lstlisting}}}
 
-Dabei beschreibt \lstinline{model} eine gewöhnliche
-Differentialgleichung, \lstinline{solver} ist ein Löser und T der
-Zeitpunkt, der für den Konsistenzordnungstest verwendet werdern
-soll. $h_0$ ist die initiale Schrittweite und L die Anzahl, wie oft
-$h_0$ bei der Berechnung halbiert werden soll.  Auf der Konsole wird
-dann in der i-ten Zeile der Fehler im i-ten Schritt, sowie die damit
-berechnete Konsistenzordnung ausgegeben.  Ein kurzes
-Anwendungsbeispiel gibt es in der Datei
+Describe \lstinline{model} una ecuación diferencial
+ordinaria \lstinline{solver} es un solucionador y T es el punto en el tiempo que se utilizará 
+para la prueba del orden de coherencia. $ h_0 $ es el tamaño del paso inicial y L es el número 
+de veces que $ h_0 $ debe dividirse a la mitad en el cálculo. En la consola, el error en el $i-esimo$ 
+paso y el orden de coherencia calculado con él se muestran en la $i-esima$ línea. 
+Hay un breve ejemplo de aplicación en el archivo. 
 \lstinline{model_ordertest.cc}.
 
-\paragraph{Berechnung der Konsistenzordnung}
+\paragraph{Cálculo del orden de consistencia}
 \begin{itemize}
-\item Für die Konsistenzordnung $\alpha$ gilt: $||u-u_h||=Ch^\alpha$
+\item Para el orden de consistencia $\alpha$ es aplicable: $||u-u_h||=Ch^\alpha$
 \item
   $E_{n_1,n_2}= \frac{||u(T)-u_{h_1}(T)||}{||u(T)-u_{h_2}(T)||} =
   \frac{Ch_1^\alpha}{Ch_2^\alpha}=
-  \left(\frac{h_1}{h_2}\right)^\alpha$, wobei $h_i=\frac{h_0}{2^i}$
-  gewählt wird.
+  \left(\frac{h_1}{h_2}\right)^\alpha$, por lo cual $h_i=\frac{h_0}{2^i}$
+  porque es elegido.
 \item
   $\alpha= \frac{log E_{n_1,n_2}}{log \left( \frac{h_1}{h_2} \right)}$
-\item Im Fall, dass T nicht direkt von einem Zeitschritt getroffen
-  wird, also $u_{h_i}(T)$ nicht direkt berechnet wird, muss man den
-  Berechnungsalgorithmus anpassen. Dabei unterscheidet man mehrere
-  Fälle. Wird T fast getroffen (Abstand kleiner als vorgegebenes
-  $\epsilon$), so nimmt man diesen Wert, das heißt man vergrößert den
-  letzten Schritt um maximal $\epsilon$, sodass man T genau
-  trifft. Andernfalls verändert man die Schrittweite der letzten ein
-  oder zwei Schritte um T genau zu treffen.
+\item En el caso de que T no se vea afectado directamente por un paso de tiempo, es decir, $ u_ {h_i} (T) $ no se calcula directamente, el algoritmo de cálculo debe adaptarse. Se hace una distinción entre varios casos. Si T casi se alcanza 
+(distancia menor que el $ \ epsilon $ dado), se usa este valor, es decir, el último paso se incrementa en un 
+máximo de $ \ epsilon $, de modo que T se golpea exactamente. De lo contrario, cambie el tamaño del paso de 
+los últimos uno o dos pasos para presionar T exactamente.
 \end{itemize}
 
 
 
-\subsection{Anwendungsbeispiele}
-Im Ordner \lstinline{examples/num1} sind einige interessante Anwendungsbeispiele gegeben, bei denen man sehen kann, wie die Verfahren aus der Vorlesung in anderen Naturwissenschaften verwendet werden.
+\subsection{Ejemplos de aplicación}
+En la carpeta \lstinline{examples/num1} Se dan algunos ejemplos de aplicación interesantes, en los que se puede ver cómo se utilizan los métodos de la conferencia en otras ciencias naturales.
 
-\subsubsection{Hodgkin-Huxley-Modell}
-Das Hodgkin-Huxley-Modell kommt aus der Neurobiologie und beschreibt die Vorgänge an der Zellmembran einer Nevenzelle bei der Reizweiterleitung. Für genauere Erklärungen siehe \url{https://de.wikipedia.org/wiki/Hodgkin-Huxley-Modell}.
+\subsubsection{Modelo de Hodgkin-Huxley}
+El modelo de Hodgkin-Huxley proviene de la neurobiología y describe los procesos en la membrana celular de una célula neural durante la transmisión de estímulos. Para obtener explicaciones más detalladas, consulte \url{https://de.wikipedia.org/wiki/Hodgkin-Huxley-Modell}.
 
-\subsubsection{n-body Problem}
-Das n-body Problem ist ein Problem der Astrophysik, bei dem es um die Bewegungen von Himmelskörpern geht. Für genauere Erklärungen siehe \url{https://en.wikipedia.org/wiki/N-body_problem}.
+\subsubsection{Problema de los n-cuerpos }
+El problema de los n-cuerpos es un problema de astrofísica que se ocupa de los movimientos de los cuerpos celestes. Para obtener explicaciones más detalladas, consulte \url{https://en.wikipedia.org/wiki/N-body_problem}.
 
-\subsection{Van der Pol Oszillator}
-Dabei handelt es sich um ein Schwingungsbeispiel, dass in unserem Fall ein gutes Beispiel für eine steife Differentialgleichung ist. Genaueres dazu gibt es unter \url{https://de.wikipedia.org/wiki/Van-der-Pol-System} bei Wikipedia.
+\subsection{Oscilador de Van der Pol }
+Este es un ejemplo de vibración que en nuestro caso es un buen ejemplo de una ecuación diferencial rígida. Más detalles están disponibles en \url{https://de.wikipedia.org/wiki/Van-der-Pol-System} bei Wikipedia.
 
 
 
 
 \begin{appendices}
 
-\section{Kleiner Programmierkurs}
+\section{Pequeño curso de programación}
 
-\section{Unix Kommandos}
-In der folgenden Tabelle sind die wichtigsten Kommandos fürs Terminal (das schwarze Fenster) zusammengestellt. Alle Worte in Großbuchstaben sind Platzhalter.
-
-
-\begin{tabular}{|c|c|}\hline
-   Kommando & Auswirkungen \\ \hline
-   cd & gehe ins home-Verzeichnis \\ \hline
-   cd ORDNERNAME & gehe in einen Ordner, dieser muss im Ordner enthalten sein, \\ & in dem man sich gerade befindet \\ \hline
-   cd .. & gehe einen Ordner höher \\ \hline
-   ls & zeigt an, was sich in dem Ordner befindet, \\
-   & in dem man gerade ist \\ \hline
-   tar cvf GEWÜNSCHTERNAME.tar & \\  Inhalt1.cc Inhalt2.cc ... Inhaltn.cc & erstellt ein Tar-Archiv \\ \hline
-   tar xvf TARNAME.tar  & entpackt das Tar \\ \hline
-   g++ -std=c++11 -o DATEINAME & \\  DATEINAME.cc & kompilieren (-std=c++11 braucht nicht jeder) \\ \hline
-   ./DATEI & Ausführen der Datei \\ \hline
+\section{Comandos de Unix }
+La siguiente tabla resume los comandos más importantes para el terminal (la ventana negra). Todas las palabras en mayúsculas son marcadores de posición.
 
 
- \end{tabular}
+%\begin{tabular}{|c|c|}\hline
+%   Kommando & Auswirkungen \\ \hline
+%   cd & gehe ins home-Verzeichnis \\ \hline
+%   cd ORDNERNAME & gehe in einen Ordner, dieser muss im Ordner enthalten sein, \\ & in dem man sich gerade befindet \\ \hline
+%   cd .. & gehe einen Ordner höher \\ \hline
+%   ls & zeigt an, was sich in dem Ordner befindet, \\
+%   & in dem man gerade ist \\ \hline
+%   tar cvf GEWÜNSCHTERNAME.tar & \\  Inhalt1.cc Inhalt2.cc ... Inhaltn.cc & erstellt ein Tar-Archiv \\ \hline
+%   tar xvf TARNAME.tar  & entpackt das Tar \\ \hline
+%   g++ -std=c++11 -o DATEINAME & \\  DATEINAME.cc & kompilieren (-std=c++11 braucht nicht jeder) \\ \hline
+%   ./DATEI & Ausführen der Datei \\ \hline
+
+
+% \end{tabular}
 
 \end{appendices}
 
