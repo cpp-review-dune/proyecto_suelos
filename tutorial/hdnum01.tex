@@ -1,4 +1,5 @@
 \documentclass[a4paper,11pt]{article}
+%\documentclass[a4paper,11pt]{presentation}
 \usepackage[spanish]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -74,9 +75,9 @@ disponible en :
 \end{center}
 
 Que tiene un control de vesiones administrada por \lstinline{git} .
-Spezifische Versionen können auf der jeweiligen Vorlesungswebseite veröffentlicht werden.
+Se pueden publicar versiones específicas en el sitio web de la conferencia correspondiente.
 
-Los objetivos en el desarrollo de HDNUM fueron i) la facilidad de uso (incluida la instalación simple), ii) la demostración de la programación orientada a objetos en la solución de métodos numéricos, así como la posibilidad de realizar cálculos con cualquier grado de precisión sobre la base de Gnu Multiple Precision Biblioteca. HDNUM ofrece actualmente las siguientes funciones:
+Los objetivos en el desarrollo de HDNUM fueron i) la facilidad de uso (incluida la instalación simple), ii) la demostración de la programación orientada a objetos en la solución de métodos numéricos, así como la posibilidad de realizar cálculos con cualquier grado de precisión sobre la base de la biblioteca de Gnu Multiple Precision \footnote{\url{https://gmplib.org}}. HDNUM ofrece actualmente las siguientes funciones:
 \begin{enumerate}[1)]
 \item Clases para vectores y matrices
 \item Solución de sistemas de ecuaciones lineales
@@ -92,15 +93,15 @@ HDNUM es una biblioteca de ''solo encabezado'' y no requiere ninguna instalació
 $ git clone https://parcomp-git.iwr.uni-heidelberg.de/Teaching/hdnum.git
 \end{lstlisting}
 
-Para realizar esto se requiere el programa \lstinline{git}, el cual está disponible gratuitamente para todos los sistemas operativos. Alternativamente también hay un archivo comprimido que se puede descargar \lstinline{tar} en la página del evento.
+Para realizar esto se requiere el programa \lstinline{git}, el cual está disponible gratuitamente para todos los sistemas operativos. Alternativamente también hay un archivo comprimido \lstinline{tar} que se puede descargar en la página del evento.
 \begin{lstlisting}[basicstyle=\ttfamily\small,frame=single]
 $ tar zxvf hdnum-XX.tgz
 \end{lstlisting}
 Los siguientes archivos y subdirectorios se pueden encontrar en el directorio instalado o descomprimido:
 \begin{itemize}
-\item \lstinline{hdnum.hh}: Este archivo encabezado debe estar integrado en los programa \lstinline{C++} para poder utilizar HDNUM.
+\item \lstinline{hdnum.hh}: Cabecera que debe estar integrada en los programas en \lstinline{C++} para poder utilizar HDNUM.
 \item 
-El directorio \lstinline{mystuff} está destinado a sus programas, pero, por supuesto, puede utilizar cualquier otro directorio. Lo único importante es que el compilador tenga el archivo \lstinline{hdnum.hh} que encontró. En el registro mystuff ya es un programa de muestra para comenzar de inmediato. Este programa se puede compilar de la siguiente forma:
+El directorio \lstinline{mystuff} está destinado a sus programas, pero, por supuesto, puede utilizar cualquier otro directorio. Lo  importante es que el compilador contenga la cabecera \lstinline{hdnum.hh}. El directorio mystuff cuenta con un programa de ejemplo para comenzar de inmediato. Este programa se puede compilar de la siguiente forma:
 
 \begin{lstlisting}[basicstyle=\ttfamily\small,frame=single]
 $ cd mystuff
@@ -118,13 +119,14 @@ Estos comandos requieren que el compilador GNU C ++ esté instalado en su sistem
 
 \subsubsection*{GNU Biblioteca de Multiple Precisión}
 
-HDNUM puede realizar cálculos con gran precisión. Esto requiere la biblioteca GNU Multiple Precision Library (GMP), que puede obtener de forma gratuita para muchos sistemas. Para poder utilizar GMP debe poner en el archivo \lstinline{hdnum.hh} la línea:
+HDNUM puede realizar cálculos con gran precisión, para esto se requiere la biblioteca GNU Multiple Precision Library (GMP), que se puede obtener de forma gratuita para varios sistemas operativos. Para utilizar GMP debe poner en el archivo \lstinline{hdnum.hh} la línea:
 \begin{lstlisting}[basicstyle=\ttfamily\small,frame=single]
 #define HDNUM_HAS_GMP 1
 \end{lstlisting}
-Además, las opciones del compilador pueden ser necesarias para que el compilador pueda encontrar las bibliotecas y los archivos de encabezado GMP. Entonces puede verse así:
+Además, las opciones del compilador pueden ser necesarias para que pueda encontrar las bibliotecas y las cabeceras GMP, lo que puede verse así:
 \begin{lstlisting}[basicstyle=\ttfamily\footnotesize,frame=single]
-$ g++ -I.. -I/opt/local/include -o example example.cc -L/opt/local/lib -lgmpxx -lgmp
+$ g++ -I.. -I/opt/local/include -o example example.cc -L/opt/local/
+lib -lgmpxx -lgmp
 \end{lstlisting}
 % $
 
@@ -137,7 +139,7 @@ $ g++ -I.. -I/opt/local/include -o example example.cc -L/opt/local/lib -lgmpxx -
 \begin{itemize}
 \item \lstinline{hdnum::Vector<T>} es una plantilla de Clase.
 \item Convierte cualquier (número)  tipo de datos \lstinline{T} en un vector. 
-\item También son posibles números complejos y muy precisos.
+\item También es posible utilizar números complejos con mucha precisión.
 \item Los vectores se comportan como los conocemos por las matemáticas:
 \begin{itemize}
 \item Tiene $n$ componentes.
@@ -542,12 +544,12 @@ se almacenan en el vector $p$.
 {\footnotesize{\begin{lstlisting}{}
 for (std::size_t k=0; k<A.rowsize()-1; ++k)
 {
-  // finde Pivotelement und vertausche Reihen
+ Encontrar el elemento pivote e intercambiar filas
   for (std::size_t r=k; r<A.rowsize(); ++r)
     if (A[r][k]!=0)
     {
-      p[k] = r;   // speichere Permutation im Schritt k
-      if (r>k)    //tausche komplette Reihe falls r!=k
+      p[k] = r;   // Almacenar la permutacion en el paso k
+      if (r>k)    //Intercambiar todas las filas si r!=k
         for (std::size_t j=0; j<A.colsize(); ++j)
         {
           T temp(A[k][j]);
@@ -557,7 +559,7 @@ for (std::size_t k=0; k<A.rowsize()-1; ++k)
       break;
     }
     if (A[k][k]==0) HDNUM_ERROR("matrix is singular");
-    // Moifikation
+    // Modificacion
     for (std::size_t i=k+1; i<A.rowsize(); ++i)
     {
       T qik(A[i][k]/A[k][k]);
@@ -576,7 +578,7 @@ for (std::size_t k=0; k<A.rowsize()-1; ++k)
   Procede de la siguiente manera: Primero, el vector $p$ se inicializa describiéndolo
   con los valores de $0$ a $n-1$ (Donde $A \in \mathbb{R^{\mathrm{n}\times \mathrm{n}}}$).  
   Luego, el elemento pivote (el elemento más grande en términos de magnitud) se busca en la columna actual
-  debajo del elemento diagonal en la matriz $A$ y la permutación requjerida para cambiarlo
+  debajo del elemento diagonal en la matriz $A$ y la permutación requerida para cambiarlo
   a la diagonal que se almacena en el vector $p$:
 
 {\footnotesize{\begin{lstlisting}{}
@@ -585,7 +587,7 @@ for (std::size_t k=0; k<A.rowsize()-1; ++k)
    // finde Pivotelement
   for (std::size_t r=k+1; r<A.rowsize(); ++r)
     if (abs(A[r][k])>abs(A[k][k]))
-    p[k] = r; // speichert Permutation im Schritt k
+    p[k] = r; // Guarda la permutacion en el paso k
 }
 \end{lstlisting}}}
   En el siguiente ciclo, las líneas $k$ y $j$ se intercambian de modo que 
@@ -674,7 +676,7 @@ for (int i=A.rowsize()-1; i>=0; --i)
 
   Ahora sabemos cómo resolver sistemas lineales de ecuaciones de la forma $Ax = b$. 
   Pero, ¿qué se debe hacer si el sistema de ecuaciones no es lineal, por ejemplo, 
-  en el caso simple y unidimensional $x^2 = a$? En la lección aprenderá procedimientos 
+  en el caso simple y unidimensional $x^2 = a$? En el curso se aprenderán procedimientos 
   que utilizan iteraciones de punto fijo para acercarse mucho a la solución. 
   El archivo \lstinline{newton.hh} proporciona herramientas útiles para resolver este tipo de ecuaciones 
   y sistemas de ecuaciones.  El más importante es el método de Newton, con el que se pueden resolver ecuaciones 
@@ -804,7 +806,7 @@ Vector<Number> u(problem.size());
 u[0]=17.0;
 \end{lstlisting}}}
 
-\item Ahora podemos aplicar el método lstinline{solve} de la clase de \lstinline{Newton} a nuestro problema:
+\item Ahora podemos aplicar el método \lstinline{solve} de la clase de \lstinline{Newton} a nuestro problema:
 
   {\footnotesize{\begin{lstlisting}{}
 newton.solve(problem,u);
@@ -822,8 +824,7 @@ utilizar para resolver sistemas de ecuaciones no lineales. Además de éste mét
 también hay algunos parámetros de procedimiento, como el número máximo de iteraciones,
 que se pueden configurar en el constructor.
 
-Para resolver, primero se comprueba si el residuo $r=F(x)$ ya es menor que el error \lstinline{abslimit}. Si es así, el valor inicial ya es suficientemente aceptable y el proceso ha terminado. En otro caso, la dirección de búsqueda se determina utilizando la descomposición $LR$ 
-$\bigtriangledown f(x_k)^{-1}f(x_k) = z_k$ definitivamente.  Usando un método de búsqueda de línea
+Para resolver, primero se comprueba si el residuo $r=F(x)$ ya es menor que el error \lstinline{abslimit}. Si es así, el valor inicial ya es suficientemente aceptable y el proceso ha terminado. En otro caso, la dirección de búsqueda se determina utilizando la descomposición $LR$, $z_k = \bigtriangledown f(x_k)^{-1}f(x_k)$.  Usando un método de búsqueda de línea
 simple y un $\lambda$ apropiado en $x_{k+1}=x_k-\lambda z_k$
 
 {\footnotesize{\begin{lstlisting}{}
