@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.5.31)  2 SEP 2021 18:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.5.31)  3 SEP 2021 13:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -855,26 +855,26 @@ LaTeX Info: Redefining \% on input line 25.
 )
 \openout1 = `hdnum01.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Info: Redefining \. on input line 52.
-LaTeX Info: Redefining \% on input line 52.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Info: Redefining \. on input line 53.
+LaTeX Info: Redefining \% on input line 53.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -965,7 +965,7 @@ sh.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
 \c@lstlisting=\count368
-Package hyperref Info: Link coloring OFF on input line 52.
+Package hyperref Info: Link coloring OFF on input line 53.
  (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 
@@ -977,21 +977,21 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count369
 )
-LaTeX Info: Redefining \ref on input line 52.
-LaTeX Info: Redefining \pageref on input line 52.
-LaTeX Info: Redefining \nameref on input line 52.
+LaTeX Info: Redefining \ref on input line 53.
+LaTeX Info: Redefining \pageref on input line 53.
+LaTeX Info: Redefining \nameref on input line 53.
 
 (./hdnum01.out) (./hdnum01.out)
 \@outlinefile=\write4
 \openout4 = `hdnum01.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 55.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 56.
 
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 55.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 56.
 
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -1021,44 +1021,38 @@ File: lstlang1.sty 2020/03/24 1.8d listings language file
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 ) [2]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 123.
-
-Overfull \hbox (49.377pt too wide) in paragraph at lines 127--128
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][] 
- []
-
-[3]
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 124.
+ [3]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <9> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 158.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 160.
 
-Overfull \hbox (20.06535pt too wide) in paragraph at lines 159--160
+Overfull \hbox (20.06535pt too wide) in paragraph at lines 161--162
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 [4] [5]
-Overfull \hbox (3.05934pt too wide) in paragraph at lines 306--307
+Overfull \hbox (3.05934pt too wide) in paragraph at lines 308--309
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (3.05934pt too wide) in paragraph at lines 328--329
+Overfull \hbox (3.05934pt too wide) in paragraph at lines 330--331
 [][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 [6] [7] [8]
 
-Package Listings Warning: Text dropped after begin of listing on input line 518
+Package Listings Warning: Text dropped after begin of listing on input line 520
 .
 
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 532.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 534.
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\lstinline' on input line 532.
+(hyperref)                removing `\lstinline' on input line 534.
 
 [9]
-Overfull \hbox (47.42113pt too wide) in paragraph at lines 594--598
+Overfull \hbox (47.42113pt too wide) in paragraph at lines 596--600
 []\T1/cmr/bx/n/10.95 La fun-ción [][][]\T1/cmr/m/n/10.95 : Fun-cio-na de ma-ne-
 ra si-mi-lar a la fun-ción an-te-rior [][][],
  []
@@ -1066,71 +1060,71 @@ ra si-mi-lar a la fun-ción an-te-rior [][][],
 [10]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\lstinline' on input line 673.
+(hyperref)                removing `\lstinline' on input line 675.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\lstinline' on input line 684.
+(hyperref)                removing `\lstinline' on input line 686.
 
 [11] [12]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\lstinline' on input line 782.
+(hyperref)                removing `\lstinline' on input line 784.
 
 
-Overfull \hbox (31.4027pt too wide) in paragraph at lines 792--793
+Overfull \hbox (31.4027pt too wide) in paragraph at lines 794--795
 [][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 [13]
-Overfull \hbox (21.03365pt too wide) in paragraph at lines 837--838
+Overfull \hbox (21.03365pt too wide) in paragraph at lines 838--839
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (55.04567pt too wide) in paragraph at lines 843--844
+Overfull \hbox (55.04567pt too wide) in paragraph at lines 844--845
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (21.03365pt too wide) in paragraph at lines 844--845
+Overfull \hbox (21.03365pt too wide) in paragraph at lines 845--846
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\lstinline' on input line 852.
+(hyperref)                removing `\lstinline' on input line 853.
 
 [14] [15]
-Overfull \hbox (31.4027pt too wide) in paragraph at lines 968--969
+Overfull \hbox (31.4027pt too wide) in paragraph at lines 969--970
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
 
  []
 
 
-Overfull \hbox (3.67891pt too wide) in paragraph at lines 990--994
+Overfull \hbox (3.67891pt too wide) in paragraph at lines 991--995
 []\T1/cmr/m/n/10.95 En ca-so de que el re-sul-ta-do pre-li-mi-nar no fue-ra lo 
 su-fi-cien-te-men-te pre-ci-so $\OT1/cmr/m/n/10.95 (\U/msa/m/n/10.95 6 \OML/cmm
 /m/it/10.95 abslimit\OT1/cmr/m/n/10.95 )$\T1/cmr/m/n/10.95 ,
  []
 
 
-Overfull \hbox (2.11452pt too wide) in paragraph at lines 1001--1002
+Overfull \hbox (2.11452pt too wide) in paragraph at lines 1002--1003
 [][][][][][][][][][][][][][][]\T1/cmtt/m/n/9 ó[][][][][][][][][] 
  []
 
 [16]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\lstinline' on input line 1031.
+(hyperref)                removing `\lstinline' on input line 1032.
 
 [17]
-Overfull \hbox (9.6963pt too wide) in paragraph at lines 1056--1057
+Overfull \hbox (9.6963pt too wide) in paragraph at lines 1057--1058
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (9.6963pt too wide) in paragraph at lines 1059--1060
+Overfull \hbox (9.6963pt too wide) in paragraph at lines 1060--1061
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][] 
  []
@@ -1138,91 +1132,91 @@ Overfull \hbox (9.6963pt too wide) in paragraph at lines 1059--1060
 [18]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\lstinline' on input line 1132.
+(hyperref)                removing `\lstinline' on input line 1133.
 
 
-Overfull \hbox (14.36427pt too wide) in paragraph at lines 1133--1140
+Overfull \hbox (14.36427pt too wide) in paragraph at lines 1134--1141
 []\T1/cmr/m/n/10.95 El ar-chi-vo [][][][][] es una re-for-mu-la-ción del ar-chi
 -vo [][][][][]
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\lstinline' on input line 1141.
+(hyperref)                removing `\lstinline' on input line 1142.
 
 
-Overfull \hbox (4.02763pt too wide) in paragraph at lines 1163--1164
+Overfull \hbox (4.02763pt too wide) in paragraph at lines 1164--1165
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (38.03966pt too wide) in paragraph at lines 1165--1166
+Overfull \hbox (38.03966pt too wide) in paragraph at lines 1166--1167
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (21.03365pt too wide) in paragraph at lines 1170--1171
+Overfull \hbox (21.03365pt too wide) in paragraph at lines 1171--1172
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (4.02763pt too wide) in paragraph at lines 1178--1179
+Overfull \hbox (4.02763pt too wide) in paragraph at lines 1179--1180
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 [19]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\lstinline' on input line 1188.
+(hyperref)                removing `\lstinline' on input line 1189.
 
 
-Overfull \hbox (9.6963pt too wide) in paragraph at lines 1217--1218
+Overfull \hbox (9.6963pt too wide) in paragraph at lines 1218--1219
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 [20]
-Overfull \hbox (48.4087pt too wide) in paragraph at lines 1254--1255
+Overfull \hbox (48.4087pt too wide) in paragraph at lines 1255--1256
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][] 
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\lstinline' on input line 1286.
+(hyperref)                removing `\lstinline' on input line 1287.
 
 [21]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\lstinline' on input line 1318.
+(hyperref)                removing `\lstinline' on input line 1319.
 
 [22]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\lstinline' on input line 1349.
+(hyperref)                removing `\lstinline' on input line 1350.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\lstinline' on input line 1354.
+(hyperref)                removing `\lstinline' on input line 1355.
 
 
 Package Listings Warning: Text dropped after begin of listing on input line 136
-0.
+1.
 
 
 Package Listings Warning: Text dropped after begin of listing on input line 137
-3.
+4.
 
 [23]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\lstinline' on input line 1435.
+(hyperref)                removing `\lstinline' on input line 1436.
 
 
 Package Listings Warning: Text dropped after begin of listing on input line 144
-3.
+4.
 
 [24]
-Overfull \hbox (45.42497pt too wide) in paragraph at lines 1478--1479
+Overfull \hbox (45.42497pt too wide) in paragraph at lines 1479--1480
 \T1/cmr/m/n/10.95 ex-pli-ca-cio-nes más de-ta-lla-das, con-sul-te []$\T1/cmtt/m
 /n/10.95 https : / / de . wikipedia . org / wiki / Hodgkin-[]Huxley-[]Modell$[]
 \T1/cmr/m/n/10.95 . 
@@ -1240,13 +1234,13 @@ Package rerunfilecheck Info: File `hdnum01.out' has not changed.
 (rerunfilecheck)             Checksum: 08FD7D13B05C78AD9AE2D68C933A3259;7097.
  ) 
 Here is how much of TeX's memory you used:
- 27044 strings out of 478994
- 464500 string characters out of 5864751
- 1006679 words of memory out of 5000000
- 43242 multiletter control sequences out of 15000+600000
- 425148 words of font info for 82 fonts, out of 8000000 for 9000
+ 27085 strings out of 478994
+ 464929 string characters out of 5864751
+ 1006891 words of memory out of 5000000
+ 43269 multiletter control sequences out of 15000+600000
+ 429175 words of font info for 97 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 101i,14n,102p,814b,1282s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 101i,14n,102p,814b,1285s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/t
 exmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf-dist/font
 s/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public
@@ -1263,17 +1257,18 @@ pe1/public/cm-super/sfbx1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-s
 uper/sfbx1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.p
 fb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/
 texmf-dist/fonts/type1/public/cm-super/sfit0900.pfb></usr/share/texmf-dist/font
-s/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/
-cm-super/sfrm1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm12
-00.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/sh
-are/texmf-dist/fonts/type1/public/cm-super/sftt0900.pfb></usr/share/texmf-dist/
-fonts/type1/public/cm-super/sftt1000.pfb></usr/share/texmf-dist/fonts/type1/pub
-lic/cm-super/sftt1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sf
-tt1200.pfb>
-Output written on hdnum01.pdf (26 pages, 522727 bytes).
+s/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf-dist/fonts/type1/public/
+cm-super/sfrm0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm10
+00.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/sh
+are/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/
+fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/pub
+lic/cm-super/sftt0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sf
+tt1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></us
+r/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
+Output written on hdnum01.pdf (26 pages, 539058 bytes).
 PDF statistics:
- 1187 PDF objects out of 1200 (max. 8388607)
- 1122 compressed objects within 12 object streams
- 696 named destinations out of 1000 (max. 500000)
+ 1200 PDF objects out of 1200 (max. 8388607)
+ 1133 compressed objects within 12 object streams
+ 698 named destinations out of 1000 (max. 500000)
  285 words of extra memory for PDF output out of 10000 (max. 10000000)
 
