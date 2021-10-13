@@ -2,9 +2,9 @@ include ../../make.def
 HDNUMPATH  = ../..
 
 # rule to build all programs without GMP support. That is the default
-nogmp: ecke eemodelproblem fem1d_linear fem1d_quadratic hodgkinhuxley iemodelproblem linearoscillator\
+nogmp: model_ejemplo ecke eemodelproblem fem1d_linear fem1d_quadratic hodgkinhuxley iemodelproblem linearoscillator\
        modelproblem modelproblem_ordertest modelproblem_runge_kutta nbody ordertest system_example vanderpol
-
+       
 # rule to build programs with GMP support
 gmp: modelproblem_high_dim
 
@@ -13,6 +13,9 @@ all: nogmp gmp
 #
 # Programs reqiring GMP support
 #
+model_ejemplo: modelproblem_ejemplo.cc
+	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
+
 ecke: ecke.cc
 	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
 

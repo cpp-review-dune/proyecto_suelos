@@ -2,7 +2,7 @@
 #include <vector>
 #include "hdnum.hh"
 
-#include "modelproblem_ejemplo.hh"
+#include "modelproblem.hh"
 #include "expliciteuler.hh"
 
 int main ()
@@ -10,13 +10,13 @@ int main ()
   typedef double Number;               // define a number type
 
   typedef ModelProblem<Number> Model;  // Model type
-  Model model(-1.0);                   // instantiate model
+  Model model(1.0);                   // instantiate model
 
   typedef ExplicitEuler<Model> Solver; // Solver type
   Solver solver(model);                // instantiate solver
-  solver.set_dt(0.02);                  // set initial time step
+  solver.set_dt(0.25);                  // set initial time step
 
-  hdnum::Vector<Number> times;           // store time values here
+  hdnum::Vector<Number> times(10);           // store time values here
   hdnum::Vector<hdnum::Vector<Number> > states; // store states here
   times.push_back(solver.get_time());  // initial time
   states.push_back(solver.get_state()); // initial state
@@ -29,7 +29,7 @@ int main ()
     }
   std::cout<<"Tiempos: "<<times<<std::endl;
   std::cout<<"Estados: "<<states<<std::endl;
-  gnuplot("mp2-ee-0.02.dat",times,states); // output model result
+  gnuplot("model_ejemplo.dat",times,states); // output model result
 
   return 0;
 }
