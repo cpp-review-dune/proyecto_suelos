@@ -8,6 +8,7 @@ void product (hdnum::Vector<T> &x)
   for (int i=1; i<x.size(); i=i+1)
     x[i] = x[i]*x[i-1];
 }
+//std::cout<<x<<std::endl;
 
 template<class T>
 T sum (hdnum::Vector<T> x)
