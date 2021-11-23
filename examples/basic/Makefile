@@ -1,8 +1,12 @@
 include ../../make.def
 HDNUMPATH  = ../..
 
-vectores01: vectores01.cc
+poisson01: poisson01.cc
 	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
+
+
+#vectores01: vectores01.cc
+#	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
 
 # rule to build all programs without GMP support. That is the default
 #nogmp: corona lr_opcount matrizen vektoren precision
