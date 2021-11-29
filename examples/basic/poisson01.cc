@@ -1,9 +1,7 @@
 #include<iostream>
 #include "hdnum.hh"
 #include<math.h>
-hdnum::Vector<T> f(hdnum::Vector<T> &x,hdnum::Vector<T> &y){
-    return x*exp(y);
-} 
+
 template<class T>
 void aih (hdnum::Vector<T> &x,double a,double h)
 {

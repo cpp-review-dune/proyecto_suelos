@@ -1,3 +1,3 @@
 #!/bin/bash
 make
-./poisson01
+./matrices02
