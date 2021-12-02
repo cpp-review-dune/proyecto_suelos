@@ -13,7 +13,7 @@ int main ()
     std::cout<<"El vector y es: "<<std::endl;
     std::cout << y <<std::endl;
     hdnum :: DenseMatrix <float> C (10 ,10 ,2.33);
-    std::cout<<"La matriz C es: "<<C<<std::endl; 
+    std::cout<<"La matriz C es: "<<C<<s 
     
 return 0;
 }
