@@ -1,11 +1,13 @@
 include ../../make.def
 HDNUMPATH  = ../..
 
-matrices02: matrices02.cc
+all: vectores01 matrices01
+
+vectores01: vectores01.cc
 	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
 
-#poisson01: poisson01.cc
-#	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
+matrices01: matrices01.cc
+	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
 
 
 #vectores01: vectores01.cc

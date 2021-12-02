@@ -1,13 +1,14 @@
 include ../../../make.def
 HDNUMPATH  = ../../..
 
-all: Vectores01_10112021 Matriz_Hdnum01 Vectores02_10112021 Vectores03_10112021 
+#Vectores01_10112021: Vectores01_10112021.cc
+#	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
 
-Matriz_01: Matriz_hdnum.cc
+Matrix_hdnum01: Matrix_hdnum01.cc
 	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
 
- #Vectores01_10112021: Vectores01_10112021.cc
-#	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
+#all: Vectores01_10112021 Matriz_Hdnum01 Vectores02_10112021 Vectores03_10112021 
+
 
 #Matriz_Hdnum01: Matriz_hdnum.cc
 #	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)

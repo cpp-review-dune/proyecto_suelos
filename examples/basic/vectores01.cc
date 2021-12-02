@@ -23,6 +23,7 @@ int main ()
 {
   // Konstruktion
   hdnum::Vector<float> x(10);        // Vektor mit 10 Elementen
+  hdnum::Vector<double> w1(5,1);  //crear vector w1 de 5 elementos
   hdnum::Vector<double> y(10,3.14);  // 10 Elemente initialisiert
   hdnum::Vector<float> a;            // ein leerer Vektor
   x.resize(117);              // vergr��ern, Daten gel�scht!
@@ -73,6 +74,6 @@ int main ()
 
   // Funktionsaufruf
   product(x);
-  std::cout << "x=" << x << std::endl;
-  std::cout << sum(x) << std::endl;
+  std::cout << "w1=" << w1 << std::endl;
+  std::cout << sum(w1) << std::endl;
 }
