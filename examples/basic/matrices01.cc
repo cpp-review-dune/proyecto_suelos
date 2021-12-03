@@ -9,36 +9,32 @@ int main(){
   b[1]=73;
   b[2]=12;
   std::cout<<"El vector b es: "<<b<<std::endl;
-  hdnum::DenseMatrix<double>A(3 ,3);
+  hdnum::DenseMatrix<double>A(3,3);
   A[0][0]=2;  A[0][1]=1; A[0][2]=7; A[1][0]=8;
   A[1][1]=8;  A[1][2]=33;  A[2][0]=-4; A[2][1]=10; 
   A[2][2]=4;
   std::cout<<"La matriz es: "<<A<<std::endl;
-  hdnum::DenseMatrix<float> C(10 ,10 ,1.0);
-    std::cout<<"La matriz C es: "<<C<<std::endl;
+  hdnum::Vector<double> x(3,0.0);
+  hdnum::Vector<double> s(3);
+  hdnum::Vector<std::size_t> p(3);
+  hdnum::Vector<std::size_t> q(3);
+  hdnum::row_equilibrate(A,s);
+  std::cout<<"La nueva matriz A es: "<<A<<std::endl;
+  std::cout<<"El vector s contiene: "<<s<<std::endl;
+  lr_fullpivot (A ,p , q );
+  std::cout<<"La nueva matriz A despues de lr_fullpivot es: "<<A<<std::endl;
+  std::cout<<"El vector p contiene: "<<p<<std::endl;
+  std::cout<<"El vector q contiene: "<<q<<std::endl;
+  hdnum::apply_equilibrate(s,b);
+  hdnum::permute_forward(p,b);
+  std::cout<<"El nuevo vector b contiene: "<<p<<std::endl;
+  std::cout<<"El nuevo vector s contiene: "<<s<<std::endl;
+  std::cout<<"El nuevo vector b contiene: "<<b<<std::endl;
+  solveL (A ,b , b );
+  std::cout<<"La solución b del sistema Ly=b es: "<<b<<std::endl;
+  solveR (A ,x , b );
+  std::cout<<"La solución x del sistema Rx=y es: "<<x<<std::endl;
 
-  //hdnum::solveL(A,b,b);
-  //std::cout<<"La nueva matriz es: "<<A<<std::endl;
-  //std::cout<<"El nuevo vector b es: "<<b<<std::endl;
-  //hdnum::Vector<double> x(3,0.0);
-  //hdnum::Vector<double> s(3);
-  //hdnum::Vector<std::size_t> p(3);
-  //hdnum::Vector<std::size_t> q(3);
-  //hdnum::row_equilibrate(A,s);
-  //hdnum::lr_fullpivot(A,p,q);
-  //hdnum::apply_equilibrate(s,b);
-  //hdnum::permute_forward(p,b);
-  //hdnum::permute_backward(q,b);
-  //std::cout<<"La matriz es: "<<A<<std::endl;
-  //hdnum::solveL(A,b,b);
-  //std::cout<<"La nueva matriz es: "<<A<<std::endl;
-  //std::cout<<"El nuevo vector b es: "<<b<<std::endl;
-  //hdnum::solveR(A,x,b);
-  //std::cout<<"El nuevo vector b es: "<<b<<std::endl;
-  //std::cout<<"El nuevo vector x es: "<<x<<std::endl;
-  //mat A(3,3);
-  //double x = A(1,2);
-  
   return 0;
 
 }

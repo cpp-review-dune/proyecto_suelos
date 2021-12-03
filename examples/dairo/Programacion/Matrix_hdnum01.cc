@@ -33,9 +33,6 @@ int main ()
     std::cout<<"La primera columna de G es: "<<x<<std::endl;
     G.sr(y,0);
     std::cout<<"La matriz G es: "<<G<<std::endl;
-    
-    
- 
 
 return 0;
 }
