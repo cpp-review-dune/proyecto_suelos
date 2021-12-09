@@ -25,7 +25,7 @@ int main(){
   solveL (A ,b , b );
   solveR (A ,x , b );
   std::cout<<"La solución x del sistema Rx=y es:"<<x<<std::endl;
-  
+  hdnum::gnuplot("final.dat",A);
   return 0;
 
 }
