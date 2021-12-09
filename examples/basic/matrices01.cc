@@ -19,22 +19,13 @@ int main(){
   hdnum::Vector<std::size_t> p(3);
   hdnum::Vector<std::size_t> q(3);
   hdnum::row_equilibrate(A,s);
-  std::cout<<"La nueva matriz A es: "<<A<<std::endl;
-  std::cout<<"El vector s contiene: "<<s<<std::endl;
   lr_fullpivot (A ,p , q );
-  std::cout<<"La nueva matriz A despues de lr_fullpivot es: "<<A<<std::endl;
-  std::cout<<"El vector p contiene: "<<p<<std::endl;
-  std::cout<<"El vector q contiene: "<<q<<std::endl;
   hdnum::apply_equilibrate(s,b);
   hdnum::permute_forward(p,b);
-  std::cout<<"El nuevo vector b contiene: "<<p<<std::endl;
-  std::cout<<"El nuevo vector s contiene: "<<s<<std::endl;
-  std::cout<<"El nuevo vector b contiene: "<<b<<std::endl;
   solveL (A ,b , b );
-  std::cout<<"La solución b del sistema Ly=b es: "<<b<<std::endl;
   solveR (A ,x , b );
-  std::cout<<"La solución x del sistema Rx=y es: "<<x<<std::endl;
-
+  std::cout<<"La solución x del sistema Rx=y es:"<<x<<std::endl;
+  
   return 0;
 
 }
