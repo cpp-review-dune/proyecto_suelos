@@ -10,9 +10,9 @@ int main(){
   b[2]=12;
   std::cout<<"El vector b es: "<<b<<std::endl;
   hdnum::DenseMatrix<double>A(3,3);
-  A[0][0]=2;  A[0][1]=1; A[0][2]=7; A[1][0]=8;
-  A[1][1]=8;  A[1][2]=33;  A[2][0]=-4; A[2][1]=10; 
-  A[2][2]=4;
+  A[0][0]=2;  A[0][1]=1; A[0][2]=7; 
+  A[1][0]=8;  A[1][1]=8; A[1][2]=33;  
+  A[2][0]=-4; A[2][1]=10; A[2][2]=4;
   std::cout<<"La matriz es: "<<A<<std::endl;
   hdnum::Vector<double> x(3,0.0);
   hdnum::Vector<double> s(3);
