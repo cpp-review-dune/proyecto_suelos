@@ -1,5 +1,5 @@
 include ../../../make.def
-HDNUMPATH  = ../..
+HDNUMPATH  = ../../..
 
 # rule to build all programs without GMP support. That is the default
 #nogmp: Hola.cc ensayo.cc #corona lr_opcount matrizen vektoren precision
@@ -9,7 +9,10 @@ HDNUMPATH  = ../..
 
 #all: nogmp gmp
 
-all: holamundo condicional
+all: holamundo condicional Hiperbolica
+
+Hiperbolica: Hiperbolica.cc
+	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
 
 holamundo: holamundo.cc
 	$(CC) $(CCFLAGS) -o $@ $^ $(LFLAGS)
