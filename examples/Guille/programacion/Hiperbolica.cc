@@ -27,6 +27,12 @@ int main(){
 
   std::cout<<"La matriz es: "<<A<<std::endl;
 
+  c *= -1;
+
+  A.umv(c, b);
+
+  std::cout<<"La Solución es:"<<c<<std::endl;
+
   //std::cout<<"La solución x del sistema Rx=y es:"<<x<<std::endl;
   //hdnum::gnuplot("final.dat",A);
   return 0;
