@@ -3,6 +3,7 @@ double promx1(double *x,int n);
 int main(){
     double x[60]={1.1, 1.2, 1.3, 1.4};
     double *p,*q;
+    double *r;
     std::cout<<" x = "<<x<<", dir de x[0] = "<<&x[0]<<std::endl;
     p = x;
     q = x;
